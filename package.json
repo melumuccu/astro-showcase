@@ -4,8 +4,8 @@
   "version": "0.6.3",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --open",
+    "start": "astro dev --open",
     "build": "astro build",
     "build:cached": "npm run cache:fetch && astro build",
     "preview": "astro preview",
@@ -51,6 +51,7 @@
     "@typescript-eslint/parser": "^6.8.0",
     "@typescript-eslint/typescript-estree": "^6.8.0",
     "cli-progress": "^3.12.0",
+    "dotenv": "^16.4.5",
     "eslint": "^8.51.0",
     "eslint-plugin-astro": "^0.27.0",
     "nx": "15.5.3"
