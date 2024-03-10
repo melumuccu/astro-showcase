@@ -32,7 +32,8 @@ if (database.Cover) {
     coverImageURL = database.Cover.Url
   } else if (database.Cover.Type === 'file') {
     try {
-      coverImageURL = filePath(new URL(database.Cover.Url))
+      // 開発環境ではNotionからそのまま画像を引っ張ってくる。それ以外では事前にNotionから引っ張ってきて自サイトに保持しておいた画像を利用する。
+      coverImageURL = import.meta.env.DEV ? database.Cover.Url : filePath(new URL(database.Cover.Url))
     } catch (err) {
       console.log('Invalid DB cover image URL')
     }
