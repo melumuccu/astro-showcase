@@ -54,6 +54,7 @@ import type {
 } from '../interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
+import type { PageProperty } from './responses'
 
 const client = new Client({
   auth: NOTION_API_SECRET,
@@ -916,13 +917,31 @@ async function _getSyncedBlockChildren(block: Block): Promise<Block[]> {
 
 function _validPageObject(pageObject: responses.PageObject): boolean {
   const prop = pageObject.properties
-  return (
-    !!prop.Page.title &&
-    prop.Page.title.length > 0 &&
-    !!prop.Slug.rich_text &&
-    prop.Slug.rich_text.length > 0 &&
-    !!prop.Date.date
-  )
+
+  // valid title
+  if (!prop.Page.title || prop.Page.title.length === 0) {
+    return false
+  }
+
+  // valid slug
+  if (prop.Slug.rich_text) {
+    if (!prop.Slug.rich_text || prop.Slug.rich_text.length === 0) {
+      return false
+    }
+  } else if (prop.Slug.formula) {
+    if (!prop.Slug.formula.string || prop.Slug.formula.string.length === 0) {
+      return false
+    }
+  } else {
+    return false
+  }
+
+  // valid date
+  if (!prop.Date.date) {
+    return false
+  }
+
+  return true
 }
 
 function _buildPost(pageObject: responses.PageObject): Post {
@@ -970,6 +989,17 @@ function _buildPost(pageObject: responses.PageObject): Post {
     }
   }
 
+  const getSlugText = (slug: PageProperty) => {
+    if (slug.rich_text) {
+      // text prop
+      return slug.rich_text.map((richText) => richText.plain_text).join('')
+    } else if (slug?.formula?.type === 'string' && slug?.formula?.string) {
+      // formula prop
+      return slug.formula.string
+    }
+    return ''
+  }
+
   const post: Post = {
     PageId: pageObject.id,
     Title: prop.Page.title
@@ -977,9 +1007,7 @@ function _buildPost(pageObject: responses.PageObject): Post {
       : '',
     Icon: icon,
     Cover: cover,
-    Slug: prop.Slug.rich_text
-      ? prop.Slug.rich_text.map((richText) => richText.plain_text).join('')
-      : '',
+    Slug: getSlugText(prop.Slug),
     Date: prop.Date.date ? prop.Date.date.start : '',
     Tags: prop.Tags.multi_select ? prop.Tags.multi_select : [],
     Excerpt:

@@ -249,7 +249,7 @@ interface PageProperties {
   [key: string]: PageProperty
 }
 
-interface PageProperty {
+export interface PageProperty {
   id: string
   type: string
 
