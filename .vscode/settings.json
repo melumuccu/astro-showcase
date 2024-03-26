@@ -1,4 +1,7 @@
 {
+  "stylelint.validate": [
+    "astro",
+  ],
   "prettier.documentSelectors": [
     "**/*.astro"
   ],
