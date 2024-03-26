@@ -52,29 +52,29 @@ const { heading, posts } = Astro.props
   .blog-posts-link {
   }
   .blog-posts-link h2 {
-    margin: 0;
     padding-left: 0.4rem;
-    color: #777;
+    margin: 0;
     font-size: 0.95rem;
+    color: #777;
   }
   .blog-posts-link ul {
-    list-style-type: none;
     padding: 0;
-    margin-top: 0.4rem;
     margin-block-end: 1rem;
+    margin-top: 0.4rem;
+    list-style-type: none;
   }
   .blog-posts-link ul li {
   }
   .blog-posts-link ul li a {
     display: block;
-    border-radius: var(--radius);
     padding: 0.4rem 0.4rem;
+    overflow: hidden;
+    font-size: 0.95rem;
     line-height: 1.2rem;
     color: inherit;
-    font-size: 0.95rem;
-    overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: var(--radius);
   }
   .blog-posts-link ul li a:hover {
     background-color: #ddd;

@@ -14,9 +14,12 @@
 
 .post {
   margin: 0 auto 40px;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
 }
 .post footer {
-  margin-top: 0.5rem;
+  width: 100%;
   padding: 0;
   border: 0;
 }
