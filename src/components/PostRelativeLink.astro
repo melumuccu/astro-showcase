@@ -49,34 +49,34 @@ const { prevPost, nextPost } = Astro.props
   }
   div.post-relative-link > div > a {
     display: block;
-    text-align: center;
-    line-height: 1.2rem;
     font-size: 0.95rem;
+    line-height: 1.2rem;
+    text-align: center;
   }
   div.post-relative-link > div > a.text {
-    margin-top: 1rem;
     padding: 0.5rem;
-    color: inherit;
+    margin-top: 1rem;
     font-size: 1rem;
-    text-decoration: underline;
     font-weight: 500;
+    color: inherit;
+    text-decoration: underline;
   }
   div.post-relative-link > div > a.colored {
     padding: 1rem;
-    border-radius: var(--radius);
     color: var(--fg);
     background: rgba(227, 226, 224, 0.5);
+    border-radius: var(--radius);
   }
   div.post-relative-link > div > a.colored > div:first-child {
     width: auto;
-    text-align: left;
     font-size: 0.85rem;
+    text-align: left;
   }
   div.post-relative-link > div > a.colored > div:nth-child(2) {
     width: auto;
     padding: 0.2rem 0 0.4rem;
-    text-align: left;
     font-size: 1rem;
     font-weight: bold;
+    text-align: left;
   }
 </style>

@@ -39,25 +39,25 @@ for (let i = startPage; i <= endPage; i++) {
 <style>
   .pagination {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     margin: 0 auto;
     color: var(--fg);
-    justify-content: center;
-    align-items: center;
   }
   .pagination a {
     display: block;
     width: 2.4rem;
     height: 3rem;
     margin: 0 0.4rem;
-    border-radius: var(--radius);
-    background: #f4f4f4;
-    color: inherit;
     font-size: 0.85rem;
-    text-align: center;
-    text-decoration: underline;
     font-weight: 500;
     line-height: 3rem;
+    color: inherit;
+    text-align: center;
+    text-decoration: underline;
+    background: #f4f4f4;
+    border-radius: var(--radius);
   }
   .pagination a:hover:not(.inactive) {
     background: #ddd;

@@ -60,32 +60,32 @@ if (pageId) {
 <style>
   a.link {
     display: inline-flex;
-    font-weight: 600;
     gap: 4px;
+    font-weight: 600;
   }
   span.icon {
-    height: fit-content;
-    flex-shrink: 0;
     position: relative;
+    flex-shrink: 0;
+    height: fit-content;
   }
   span.icon img.notion-icon {
+    position: relative;
+    flex-shrink: 0;
     width: 1.3em;
     height: 1.3rem;
     vertical-align: sub;
-    flex-shrink: 0;
-    position: relative;
   }
   span.icon img.icon-link {
-    display: block;
     position: absolute;
     top: 1em;
     right: 0;
+    display: block;
     width: 8px;
     height: 8px;
   }
   span.text {
-    color: var(--fg);
     font-weight: 500;
+    color: var(--fg);
     text-decoration: underline;
   }
   span.text.not-found {

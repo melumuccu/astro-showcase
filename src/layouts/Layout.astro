@@ -174,8 +174,8 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   main {
     flex: 1;
-    order: 2;
     justify-content: space-between;
+    order: 2;
   }
   @media (max-width: 640px) {
     main {
@@ -256,8 +256,8 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   main footer {
     margin: 30px 0 10px;
-    text-align: center;
     font-size: 0.75rem;
+    text-align: center;
   }
   @media (max-width: 640px) {
     main footer {
@@ -311,8 +311,9 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   body {
     min-height: 100vh;
-    background: var(--bg);
-    color: var(--fg);
+
+    /* Hack */
+    overflow-x: hidden;
     font-family:
       ui-sans-serif,
       -apple-system,
@@ -329,17 +330,16 @@ if (database.Icon && database.Icon.Type === 'file') {
       sans-serif,
       'Segoe UI Emoji',
       'Segoe UI Symbol';
+    color: var(--fg);
+    background: var(--bg);
+    background-attachment: fixed;
 
     /*background-image: radial-gradient(#ddd 1px, transparent 1px),
       radial-gradient(#ddd 1px, transparent 1px);*/
     background-position:
       0 0,
       25px 25px;
-    background-attachment: fixed;
     background-size: 50px 50px;
-
-    /* Hack */
-    overflow-x: hidden;
 
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
@@ -348,8 +348,8 @@ if (database.Icon && database.Icon.Type === 'file') {
   figure {
     margin: 0;
     font-size: 0.85rem;
-    color: #999;
     line-height: 1.8rem;
+    color: #999;
   }
 
   a {
@@ -362,15 +362,15 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   mark {
     padding: var(--gap-quarter);
-    border-radius: var(--radius);
     background: rgba(247, 212, 255, 0.8);
+    border-radius: var(--radius);
   }
 
   h1 {
     margin: 0;
-    color: var(--fg);
     font-size: 2rem;
     font-weight: 700;
+    color: var(--fg);
   }
 
   @media (max-width: 640px) {
@@ -380,27 +380,27 @@ if (database.Icon && database.Icon.Type === 'file') {
   }
 
   ol {
-    color: #222;
-    font-weight: 400;
     font-size: 0.9rem;
+    font-weight: 400;
     line-height: 1.8rem;
+    color: #222;
   }
   p,
   ul {
-    color: #222;
-    font-weight: 400;
     font-size: 1rem;
+    font-weight: 400;
     line-height: 1.8rem;
+    color: #222;
   }
   ul,
   ol {
-    margin: 0;
     padding-inline-start: 1.5rem;
+    margin: 0;
   }
   pre {
     margin: 0;
-    white-space: pre;
     tab-size: 2;
+    white-space: pre;
   }
   pre :global(code) {
     overflow: auto;
@@ -410,18 +410,18 @@ if (database.Icon && database.Icon.Type === 'file') {
   hr {
     display: block;
     height: 1px;
-    border: 0;
     margin: 0.3rem 0;
     background-color: #333;
+    border: 0;
   }
 
   code {
-    font-size: 0.9rem;
-    background: rgba(135, 131, 120, 0.15);
-    color: #eb5757;
     padding: 0.25rem;
-    border-radius: var(--radius);
     font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #eb5757;
+    background: rgba(135, 131, 120, 0.15);
+    border-radius: var(--radius);
   }
 
   table {
@@ -442,15 +442,15 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   table td,
   table th {
-    font-size: 0.9rem;
-    border: 1px solid #e4e4e4;
     padding: 0.5rem 1rem;
-    text-align: left;
+    font-size: 0.9rem;
     line-height: 1.2rem;
+    text-align: left;
+    border: 1px solid #e4e4e4;
   }
   table td::after {
-    content: '';
     display: inline-block;
     min-height: 0.9rem;
+    content: '';
   }
 </style>

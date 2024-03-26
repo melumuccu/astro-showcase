@@ -91,23 +91,23 @@ const grammer =
   .code button.copy {
     display: block;
     width: 4rem;
+    line-height: 1.2rem;
+    color: var(--fg);
+    cursor: pointer;
+    background-color: rgba(227, 226, 224, 0.5);
     border: 0;
     border-radius: var(--radius);
-    background-color: rgba(227, 226, 224, 0.5);
-    color: var(--fg);
-    line-height: 1.2rem;
-    cursor: pointer;
   }
   .code pre {
     display: block;
-    overflow: auto;
+    width: 100px;
+    min-width: 100%;
     padding: 0.8rem 2rem 2rem;
+    overflow: auto;
+    overflow-x: auto;
     font-size: 0.9rem;
     line-height: 1.2rem;
     white-space: pre;
-    width: 100px;
-    min-width: 100%;
-    overflow-x: auto;
     &::-webkit-scrollbar {
       height: 10px;
     }
@@ -122,8 +122,8 @@ const grammer =
     padding: 2rem;
   }
   .code pre code {
-    color: var(--fg);
     padding: 0;
+    color: var(--fg);
     background: rgb(247, 246, 243) !important;
     border-radius: 0;
   }
