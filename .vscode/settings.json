@@ -1,10 +1,6 @@
 {
-  "stylelint.validate": [
-    "astro",
-  ],
-  "prettier.documentSelectors": [
-    "**/*.astro"
-  ],
+  "stylelint.validate": ["astro"],
+  "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
