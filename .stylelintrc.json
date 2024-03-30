@@ -1,3 +1,7 @@
 {
-  "extends": ["stylelint-config-html/astro", "stylelint-config-recess-order"]
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-html/astro",
+    "stylelint-config-recess-order"
+  ]
 }

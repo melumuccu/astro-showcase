@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon'
   .search-button {
     display: flex;
     width: 100%;
-    padding: 0.4rem 0.4rem;
+    padding: 0.4rem;
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
     font-weight: bold;
@@ -19,15 +19,18 @@ import { Icon } from 'astro-icon'
     border: none;
     border-radius: var(--radius);
   }
+
   .search-button:hover {
     cursor: pointer;
     background-color: #ddd;
   }
+
   .search-button svg {
     width: 20px;
     height: 20px;
     margin-right: 0.2rem;
   }
+
   [astro-icon='octicon:search-24'] {
     color: var(--fg);
   }

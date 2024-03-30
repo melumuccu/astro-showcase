@@ -1,23 +1,26 @@
 .main header {
   padding: 0 0 20px;
 }
+
 .main footer {
-  border-top: 1px dashed #888;
-  margin: 0 auto;
   padding: 40px 0 0;
+  margin: 0 auto;
+  border-top: 1px dashed #888;
 }
-@media (max-width: 640px) {
+
+@media (width <= 640px) {
   .main footer {
     margin: 0 auto 40px;
   }
 }
 
 .post {
-  margin: 0 auto 40px;
   display: flex;
-  gap: 1.5rem;
   flex-direction: column;
+  gap: 1.5rem;
+  margin: 0 auto 40px;
 }
+
 .post footer {
   width: 100%;
   padding: 0;

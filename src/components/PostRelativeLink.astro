@@ -19,7 +19,7 @@ const { prevPost, nextPost } = Astro.props
           <div class="label">◀︎ Back</div>
           <div class="wrap">
             <PostTags post={prevPost} enableLink={false} />
-            <div class="title text_ellipsis">{prevPost.Title}</div>
+            <div class="title text-ellipsis">{prevPost.Title}</div>
           </div>
         </a>
       )
@@ -30,7 +30,7 @@ const { prevPost, nextPost } = Astro.props
           <div class="label">Next ▶︎</div>
           <div class="wrap">
             <PostTags post={nextPost} enableLink={false} />
-            <div class="title text_ellipsis">{nextPost.Title}</div>
+            <div class="title text-ellipsis">{nextPost.Title}</div>
           </div>
         </a>
       )
@@ -48,6 +48,7 @@ const { prevPost, nextPost } = Astro.props
     align-items: center;
     justify-content: center;
   }
+
   .next-prev-link > * {
     display: flex;
     flex-direction: column;
@@ -57,28 +58,33 @@ const { prevPost, nextPost } = Astro.props
     width: 100%;
     padding: 1rem;
     color: var(--fg);
-    background: rgba(227, 226, 224, 0.5);
+    background: rgb(227 226 224 / 50%);
     border-radius: var(--radius);
   }
+
   .next-prev-link .label {
     align-self: flex-start;
     width: auto;
     font-size: 0.85rem;
     font-weight: bold;
   }
+
   .next-prev-link > *:nth-child(1) .label {
     align-self: flex-start;
   }
+
   .next-prev-link > *:nth-child(2) .label {
     align-self: flex-end;
   }
+
   .next-prev-link .wrap {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
   }
-  .text_ellipsis {
+
+  .text-ellipsis {
     -webkit-line-clamp: 1;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -90,13 +96,15 @@ const { prevPost, nextPost } = Astro.props
     align-items: center;
     justify-content: center;
   }
+
   .top-link > a {
     padding: 0.75rem;
     font-size: 1rem;
     font-weight: bold;
     text-decoration: underline;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     .next-prev-link {
       flex-direction: column;
     }

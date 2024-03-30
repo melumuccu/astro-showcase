@@ -42,22 +42,28 @@
   color: #dd4a68;
 }
 
+.token.tag,
+.token.selector {
+  color: #00009f;
+}
+
 .token.atrule,
 .token.keyword,
-.token.attr-name,
+.token.attr-name {
+  color: #07a;
+}
+
 .language-autohotkey .token.selector {
   color: #07a;
+}
+
+.language-autohotkey .token.keyword {
+  color: #00009f;
 }
 
 .token.function,
 .language-autohotkey .token.tag {
   color: #dd4a68;
-}
-
-.token.tag,
-.token.selector,
-.language-autohotkey .token.keyword {
-  color: #00009f;
 }
 
 .token.important,

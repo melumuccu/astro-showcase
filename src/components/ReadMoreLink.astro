@@ -17,14 +17,16 @@ const { post } = Astro.props
   .read-more-link {
     color: var(--fg);
   }
+
   .read-more-link a {
     font-size: 1rem;
     font-weight: 500;
     line-height: 2rem;
-    color: rgb(55, 53, 47);
+    color: rgb(55 53 47);
     text-decoration: underline;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     .read-more-link a {
       width: 50%;
     }

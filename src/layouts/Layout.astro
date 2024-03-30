@@ -166,7 +166,8 @@ if (database.Icon && database.Icon.Type === 'file') {
     display: flex;
     max-width: 1280px;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     .container > div {
       display: block;
     }
@@ -177,7 +178,8 @@ if (database.Icon && database.Icon.Type === 'file') {
     justify-content: space-between;
     order: 2;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     main {
       order: 1;
     }
@@ -186,18 +188,46 @@ if (database.Icon && database.Icon.Type === 'file') {
   aside {
     order: 1;
     width: 300px;
-    padding: 20px 20px;
+    padding: 20px;
     background-color: #f4f4f4;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     aside {
       order: 2;
       width: 100%;
     }
   }
 
-  div.cover {
+  div.content {
+    padding: 20px 40px;
   }
+
+  @media (width <= 640px) {
+    div.content {
+      padding: 0 18px;
+    }
+  }
+
+  main header {
+    padding: 20px 0;
+  }
+
+  main header h1 {
+    font-weight: 700;
+    color: #333;
+  }
+
+  main header h1 a img {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.2em;
+    margin-left: -0.3rem;
+    font-size: 1.1em;
+    vertical-align: sub;
+  }
+
   div.cover img {
     display: block;
     width: 100%;
@@ -206,45 +236,6 @@ if (database.Icon && database.Icon.Type === 'file') {
     object-position: center 60%;
   }
 
-  div.content {
-    padding: 20px 40px;
-  }
-  @media (max-width: 640px) {
-    div.content {
-      padding: 0 18px;
-    }
-  }
-
-  main header {
-    padding: 20px 0 20px;
-  }
-  main header h1 {
-    font-weight: 700;
-    color: #333;
-  }
-  main header h1 a {
-    display: block;
-    color: inherit;
-  }
-  main header h1 a:hover {
-    color: inherit;
-  }
-  main header h1 a span,
-  main header h1 a img {
-    display: inline-block;
-    font-size: 1.1em;
-  }
-  main header h1 a span {
-    margin-right: 0.3em;
-    margin-left: -0.1rem;
-  }
-  main header h1 a img {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.2em;
-    margin-left: -0.3rem;
-    vertical-align: sub;
-  }
   main header h1 a img.custom-icon {
     border-radius: var(--radius);
   }
@@ -259,17 +250,36 @@ if (database.Icon && database.Icon.Type === 'file') {
     font-size: 0.75rem;
     text-align: center;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     main footer {
       margin: 0 auto 30px;
     }
   }
+
   main footer span {
     color: #777;
   }
+
+  main header h1 a span {
+    display: inline-block;
+    margin-right: 0.3em;
+    margin-left: -0.1rem;
+    font-size: 1.1em;
+  }
+
   main footer a {
     color: inherit;
     text-decoration: underline;
+  }
+
+  main header h1 a {
+    display: block;
+    color: inherit;
+  }
+
+  main header h1 a:hover {
+    color: inherit;
   }
 </style>
 
@@ -279,7 +289,6 @@ if (database.Icon && database.Icon.Type === 'file') {
     --gap-half: 0.5rem;
     --gap: 1rem;
     --gap-double: 2rem;
-
     --bg: #fff;
     --fg: #333;
     --accents-1: #666;
@@ -287,14 +296,12 @@ if (database.Icon && database.Icon.Type === 'file') {
     --accents-3: #666;
     --geist-foreground: #000;
     --geist-success: #690;
-
     --radius: 4px;
-
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    --font-sans: -apple-system, blinkmacsystemfont, 'Segoe UI', 'Roboto',
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
-    --font-mono: SFMono-Regular, Menlo, Consolas, 'PT Mono', 'Liberation Mono',
-      Courier, monospace;
+    --font-mono: sfmono-regular, menlo, consolas, 'PT Mono', 'Liberation Mono',
+      courier, monospace;
   }
 
   * {
@@ -323,7 +330,7 @@ if (database.Icon && database.Icon.Type === 'file') {
       'Hiragino Sans',
       'Hiragino Kaku Gothic ProN',
       'Hiragino Sans GB',
-      メイリオ,
+      'メイリオ',
       Meiryo,
       'Apple Color Emoji',
       Arial,
@@ -334,15 +341,14 @@ if (database.Icon && database.Icon.Type === 'file') {
     background: var(--bg);
     background-attachment: fixed;
 
-    /*background-image: radial-gradient(#ddd 1px, transparent 1px),
-      radial-gradient(#ddd 1px, transparent 1px);*/
+    /* background-image: radial-gradient(#ddd 1px, transparent 1px),
+      radial-gradient(#ddd 1px, transparent 1px); */
     background-position:
       0 0,
       25px 25px;
     background-size: 50px 50px;
-
     -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   figure {
@@ -356,13 +362,14 @@ if (database.Icon && database.Icon.Type === 'file') {
     color: var(--accents-1);
     text-decoration: none;
   }
+
   a:hover {
     color: var(--accents-1);
   }
 
   mark {
     padding: var(--gap-quarter);
-    background: rgba(247, 212, 255, 0.8);
+    background: rgb(247 212 255 / 80%);
     border-radius: var(--radius);
   }
 
@@ -373,7 +380,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     color: var(--fg);
   }
 
-  @media (max-width: 640px) {
+  @media (width <= 640px) {
     h1 {
       font-size: 1.6rem;
     }
@@ -385,6 +392,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     line-height: 1.8rem;
     color: #222;
   }
+
   p,
   ul {
     font-size: 1rem;
@@ -392,16 +400,20 @@ if (database.Icon && database.Icon.Type === 'file') {
     line-height: 1.8rem;
     color: #222;
   }
+
   ul,
   ol {
     padding-inline-start: 1.5rem;
     margin: 0;
   }
+
   pre {
     margin: 0;
     tab-size: 2;
     white-space: pre;
   }
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   pre :global(code) {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -420,7 +432,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     font-family: var(--font-mono);
     font-size: 0.9rem;
     color: #eb5757;
-    background: rgba(135, 131, 120, 0.15);
+    background: rgb(135 131 120 / 15%);
     border-radius: var(--radius);
   }
 
@@ -448,6 +460,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     text-align: left;
     border: 1px solid #e4e4e4;
   }
+
   table td::after {
     display: inline-block;
     min-height: 0.9rem;
