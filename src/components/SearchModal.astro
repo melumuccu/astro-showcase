@@ -34,7 +34,7 @@
     z-index: 99;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0 0 0 / 50%);
   }
 
   div.search-modal {
@@ -46,7 +46,8 @@
     background-color: var(--bg);
     border-radius: 6px;
   }
-  @media (max-width: 640px) {
+
+  @media (width <= 640px) {
     div.search-modal {
       left: 0;
       width: 100%;
@@ -57,6 +58,7 @@
     padding: 0 6px;
     margin: 6px 0;
   }
+
   div.search-prompt input {
     width: 100%;
     padding: 0.4rem;
@@ -64,28 +66,33 @@
     line-height: 1.6rem;
     color: var(--fg);
     background-color: var(--input-bg);
-    border: 0px solid transparent;
+    border: 0 solid transparent;
   }
 
   div.search-result {
     border-top: 1px solid var(--hr-border);
   }
+
   div.search-result ul {
     padding: 0;
     margin: 0.3rem;
     list-style: none;
   }
-  div.search-result ul > :global(li) {
-  }
+
+  /* TODO :global 辞める */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   div.search-result ul > :global(li > a) {
     display: block;
     padding: 0.4rem 0.6rem;
     border-radius: var(--radius);
   }
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   div.search-result ul > :global(li.selected > a) {
-    background-color: rgba(241, 241, 239, 1);
+    background-color: rgb(241 241 239 / 100%);
   }
 
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   div.search-result :global(div.search-result-title) {
     padding: 0.1rem 0;
     font-size: 1.1rem;
@@ -93,6 +100,8 @@
     line-height: 1.2rem;
     color: var(--fg);
   }
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   div.search-result :global(div.search-result-description) {
     margin: 0 0 0.1rem;
     font-size: 0.9rem;

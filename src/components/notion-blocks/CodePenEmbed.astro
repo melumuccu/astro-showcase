@@ -17,11 +17,15 @@ const id = url.pathname.split('/')[3]
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 <style is:global>
+  /* codepen特有class名の様子。該当ルールをdisableとする。 */
+  /* stylelint-disable-next-line selector-class-pattern */
   .cp_embed_wrapper {
     width: 100%;
     aspect-ratio: 1.6 / 1;
     background-color: #fff;
   }
+
+  /* stylelint-disable-next-line selector-class-pattern */
   .cp_embed_wrapper iframe {
     height: 100% !important;
   }
