@@ -915,35 +915,15 @@ async function _getSyncedBlockChildren(block: Block): Promise<Block[]> {
   return children
 }
 
-function _validPageObject(pageObject: responses.PageObject): boolean {
-  const prop = pageObject.properties
+function _validPageObject(pageObject: responses.PageObject) {
+  const { Page, Slug, Date } = pageObject.properties
 
-  // valid title
-  if (!prop.Page.title || prop.Page.title.length === 0) {
-    return false
-  }
+  const hasValidTitle = Page?.title?.length
+  const hasValidSlug = Slug?.rich_text?.length || Slug?.formula?.string?.length
+  const hasValidDate = Date?.date
 
-  // valid slug
-  if (prop.Slug.rich_text) {
-    if (!prop.Slug.rich_text || prop.Slug.rich_text.length === 0) {
-      return false
-    }
-  } else if (prop.Slug.formula) {
-    if (!prop.Slug.formula.string || prop.Slug.formula.string.length === 0) {
-      return false
-    }
-  } else {
-    return false
-  }
-
-  // valid date
-  if (!prop.Date.date) {
-    return false
-  }
-
-  return true
+  return !!(hasValidTitle && hasValidSlug && hasValidDate)
 }
-
 function _buildPost(pageObject: responses.PageObject): Post {
   const prop = pageObject.properties
 
