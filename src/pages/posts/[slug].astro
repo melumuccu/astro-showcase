@@ -114,15 +114,27 @@ if (post.FeaturedImage && post.FeaturedImage.Url) {
     </div>
   </div>
 
-  <div slot="aside" class="aside">
-    <BlogPostsLink
-      heading="Posts in the same category"
-      posts={postsHavingSameTag.filter(
-        (p: interfaces.Post) => p.Slug !== post.Slug
-      )}
-    />
-    <BlogPostsLink heading="Recommended" posts={rankedPosts} />
-    <BlogPostsLink heading="Latest posts" posts={recentPosts} />
-    <BlogTagsLink heading="Categories" tags={tags} />
+  <div slot="aside" class={styles.aside}>
+    {
+      !!recentPosts.length && (
+        <BlogPostsLink heading="新着" posts={recentPosts} />
+      )
+    }
+    {
+      !!postsHavingSameTag.length && (
+        <BlogPostsLink
+          heading="同じタグ"
+          posts={postsHavingSameTag.filter(
+            (p: interfaces.Post) => p.Slug !== post.Slug
+          )}
+        />
+      )
+    }
+    {
+      !!rankedPosts.length && (
+        <BlogPostsLink heading="おすすめ!" posts={rankedPosts} />
+      )
+    }
+    {!!tags.length && <BlogTagsLink heading="タグ一覧" tags={tags} />}
   </div>
 </Layout>
