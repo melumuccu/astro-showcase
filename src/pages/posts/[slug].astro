@@ -45,7 +45,7 @@ const [blocks, allPosts, rankedPosts, recentPosts, tags, postsHavingSameTag] =
     getRankedPosts(),
     getPosts(5),
     getAllTags(),
-    getPostsByTag(post.Slug, post.Tags[0]?.name, 6),
+    getPostsByTag(post.Tags[0]?.name, 6, post.Slug),
   ])
 
 const fileAtacchedBlocks = extractTargetBlocks('image', blocks)

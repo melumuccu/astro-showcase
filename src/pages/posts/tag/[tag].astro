@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 const { tag } = Astro.params
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE),
+  getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE, null),
   getRankedPosts(),
   getAllTags(),
   getNumberOfPagesByTag(tag),

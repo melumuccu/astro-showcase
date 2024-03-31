@@ -164,10 +164,18 @@ export async function getPostByPageId(pageId: string): Promise<Post | null> {
   return allPosts.find((post) => post.PageId === pageId) || null
 }
 
+/**
+ * タグ名で記事を取得する
+ *
+ * @param tagName
+ * @param pageSize
+ * @param excludeSlug 除外対象のslug名。除外不要の場合はnullとする。
+ * @returns
+ */
 export async function getPostsByTag(
-  slug: string,
   tagName: string,
-  pageSize = 10
+  pageSize = 10,
+  excludeSlug: string | null
 ): Promise<Post[]> {
   if (!tagName) return []
 
@@ -175,7 +183,7 @@ export async function getPostsByTag(
   return allPosts
     .filter((post) => post.Tags.find((tag) => tag.name === tagName))
     .slice(0, pageSize)
-    .filter((p: Post) => p.Slug !== slug)
+    .filter((p: Post) => p.Slug !== excludeSlug)
 }
 
 // page starts from 1 not 0
