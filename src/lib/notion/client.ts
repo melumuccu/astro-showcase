@@ -165,6 +165,7 @@ export async function getPostByPageId(pageId: string): Promise<Post | null> {
 }
 
 export async function getPostsByTag(
+  slug: string,
   tagName: string,
   pageSize = 10
 ): Promise<Post[]> {
@@ -174,6 +175,7 @@ export async function getPostsByTag(
   return allPosts
     .filter((post) => post.Tags.find((tag) => tag.name === tagName))
     .slice(0, pageSize)
+    .filter((p: Post) => p.Slug !== slug)
 }
 
 // page starts from 1 not 0

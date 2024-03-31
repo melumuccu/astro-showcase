@@ -45,7 +45,7 @@ const [blocks, allPosts, rankedPosts, recentPosts, tags, postsHavingSameTag] =
     getRankedPosts(),
     getPosts(5),
     getAllTags(),
-    getPostsByTag(post.Tags[0]?.name, 6),
+    getPostsByTag(post.Slug, post.Tags[0]?.name, 6),
   ])
 
 const fileAtacchedBlocks = extractTargetBlocks('image', blocks)
@@ -122,12 +122,7 @@ if (post.FeaturedImage && post.FeaturedImage.Url) {
     }
     {
       !!postsHavingSameTag.length && (
-        <BlogPostsLink
-          heading="同じタグ"
-          posts={postsHavingSameTag.filter(
-            (p: interfaces.Post) => p.Slug !== post.Slug
-          )}
-        />
+        <BlogPostsLink heading="同じタグ" posts={postsHavingSameTag} />
       )
     }
     {
