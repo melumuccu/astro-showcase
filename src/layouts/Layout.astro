@@ -173,6 +173,19 @@ if (database.Icon && database.Icon.Type === 'file') {
     }
   }
 
+  .container > header {
+    --border-line-widrh: 8px;
+
+    border-bottom: var(--border-line-widrh, 6px) dashed
+      var(--color--cafe-au-lait--faux-camaieu-3);
+  }
+
+  @media (width <= 640px) {
+    .container > header {
+      --border-line-widrh: 6px;
+    }
+  }
+
   main {
     flex: 1;
     justify-content: space-between;
