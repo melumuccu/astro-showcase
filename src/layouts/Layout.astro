@@ -76,6 +76,14 @@ if (database.Icon && database.Icon.Type === 'file') {
       integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0"
       crossorigin="anonymous"
     />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Google Fonts: Zen Antique Soft -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
@@ -94,7 +102,7 @@ if (database.Icon && database.Icon.Type === 'file') {
         <main>
           <div class="content">
             <header>
-              <h1>
+              <h1 class="zen-antique-soft-regular">
                 <a href={getNavLink('/')}>
                   {database.Title}
                 </a>
@@ -150,13 +158,6 @@ if (database.Icon && database.Icon.Type === 'file') {
     }
   }
 
-  .container > header {
-    --border-line-widrh: 8px;
-
-    border-bottom: var(--border-line-widrh, 6px) dashed
-      var(--color--cafe-au-lait--faux-camaieu-3);
-  }
-
   @media (width <= 640px) {
     .container > header {
       --border-line-widrh: 6px;
@@ -178,7 +179,7 @@ if (database.Icon && database.Icon.Type === 'file') {
   aside {
     order: 1;
     width: 300px;
-    padding: 20px;
+    padding: 52px 20px 20px;
     background-color: #bbbbbb4a;
   }
 
@@ -270,6 +271,12 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   main header h1 a:hover {
     color: inherit;
+  }
+
+  .zen-antique-soft-regular {
+    font-family: 'Zen Antique Soft', serif;
+    font-style: normal;
+    font-weight: 400;
   }
 </style>
 
@@ -365,7 +372,7 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--fg);
   }
