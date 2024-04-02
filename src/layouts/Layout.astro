@@ -159,6 +159,7 @@ if (database.Icon && database.Icon.Type === 'file') {
 <style>
   .container {
     min-height: 100vh;
+    background-color: rgb(var(--color--cafe-au-lait--rgb) / 15%);
   }
 
   .container > div {
@@ -169,6 +170,19 @@ if (database.Icon && database.Icon.Type === 'file') {
   @media (width <= 640px) {
     .container > div {
       display: block;
+    }
+  }
+
+  .container > header {
+    --border-line-widrh: 8px;
+
+    border-bottom: var(--border-line-widrh, 6px) dashed
+      var(--color--cafe-au-lait--faux-camaieu-3);
+  }
+
+  @media (width <= 640px) {
+    .container > header {
+      --border-line-widrh: 6px;
     }
   }
 
@@ -188,7 +202,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     order: 1;
     width: 300px;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #bbbbbb4a;
   }
 
   @media (width <= 640px) {
