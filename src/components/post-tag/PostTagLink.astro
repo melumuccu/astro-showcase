@@ -1,0 +1,38 @@
+---
+import type { SelectProperty } from '../../lib/interfaces.ts'
+import { getTagLink } from '../../lib/blog-helpers.ts'
+import '@/styles/notion-color.css'
+import { tagMapper } from './PostTag.astro'
+
+export interface Props {
+  tag: SelectProperty
+}
+
+const { tag } = Astro.props
+const label = tag.name in tagMapper ? tagMapper[tag.name] : tag.name
+---
+
+<div class="post-tag-link">
+  <a href={getTagLink(tag.name)} class={`tag ${tag.color}`}>
+    {label}
+  </a>
+</div>
+
+<style>
+  .post-tag-link {
+    width: fit-content;
+  }
+
+  .post-tag-link a {
+    display: flex;
+    flex-shrink: 1;
+    align-items: center;
+    min-width: 0;
+    height: fit-content;
+    padding: 2px 6px;
+    line-height: 1.2;
+    color: rgb(50 48 44);
+    background: rgb(227 226 224 / 50%);
+    border-radius: 3px;
+  }
+</style>

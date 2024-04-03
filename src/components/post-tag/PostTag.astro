@@ -1,0 +1,41 @@
+---
+import type { SelectProperty } from '../../lib/interfaces.ts'
+import '@/styles/notion-color.css'
+
+export interface Props {
+  tag: SelectProperty
+}
+
+const { tag } = Astro.props
+
+export const tagMapper: { [k: string]: string } = {
+  'cafe-info': 'ℹ️ お知らせ(cafe)',
+  blog: '🖊️ ブログ',
+  tech: '💻 技術',
+}
+
+const label = tag.name in tagMapper ? tagMapper[tag.name] : tag.name
+---
+
+<div class="post-tag">
+  <span class={`tag ${tag.color}`}>{label}</span>
+</div>
+
+<style>
+  .post-tag {
+    width: fit-content;
+  }
+
+  .post-tag span {
+    display: flex;
+    flex-shrink: 1;
+    align-items: center;
+    min-width: 0;
+    height: fit-content;
+    padding: 2px 6px;
+    line-height: 1.2;
+    color: rgb(50 48 44);
+    background: rgb(227 226 224 / 50%);
+    border-radius: 3px;
+  }
+</style>
