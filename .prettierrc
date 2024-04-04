@@ -6,6 +6,7 @@
     "prettier-plugin-organize-imports",
     "prettier-plugin-astro-organize-imports"
   ],
+  "astroOrganizeImportsMode": "SortAndCombine",
   "overrides": [
     {
       "files": "*.astro",

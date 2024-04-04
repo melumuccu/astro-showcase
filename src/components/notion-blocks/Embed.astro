@@ -1,12 +1,11 @@
 ---
-// XXX: isTweetURL が何故か消されるためここではprettier-plugin-astro-organize-importsを使用しない
-// tslint:disable:ordered-imports
+// XXX: isTweetURL が何故か消されるためprettier-plugin-astro-organize-importsを"astroOrganizeImportsMode": "SortAndCombine"で運用する
 import {
   isCodePenURL,
   isInstagramURL,
   isPinterestURL,
-  isTweetURL,
   isTikTokURL,
+  isTweetURL,
 } from '../../lib/blog-helpers.ts'
 import * as interfaces from '../../lib/interfaces.ts'
 import Bookmark from './Bookmark.astro'
