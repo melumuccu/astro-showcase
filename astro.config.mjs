@@ -41,4 +41,7 @@ export default defineConfig({
     FeaturedImageDownloader(),
     PublicNotionCopier(),
   ],
+  redirects: {
+    '/': '/posts',
+  },
 });
