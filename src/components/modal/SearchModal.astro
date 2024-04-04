@@ -1,0 +1,232 @@
+---
+import Modal from './Modal.astro'
+---
+
+<Modal modalId="SearchModal">
+  <div class="search-modal">
+    <div class="search-prompt">
+      <input type="text" placeholder="Search..." />
+    </div>
+    <div class="search-result">
+      <ul>
+        <li>
+          <a href="#">
+            <div class="search-result-title"></div>
+            <div class="search-result-description"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</Modal>
+
+<script>
+  type FeedItem = {
+    title: string | null
+    link: string | null
+    description: string | null
+    pubDate: string | null
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    let feedItems: FeedItem[] = []
+    let fetched = false
+
+    const dialog = document.getElementById('SearchModal')
+    if (dialog != null) {
+      initFeedItems().observe(dialog, {
+        attributes: true,
+        attributeFilter: ['open'],
+      })
+    }
+
+    // <input>へ入力時イベント設定
+    document
+      .querySelector('.search-prompt input')
+      ?.addEventListener('input', searchAndRender)
+
+    /**
+     * 記事一覧を初期化。モーダルの初回オープン時のみ実行される。
+     */
+    function initFeedItems() {
+      return new MutationObserver((mutations, observer) => {
+        mutations.forEach(async (mutation) => {
+          if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'open'
+          ) {
+            if (!fetched) {
+              feedItems = await fetchRSS(feedItems)
+            }
+            searchAndRender()
+          }
+        })
+      })
+    }
+
+    /**
+     * 検索またはレンダリング処理を実行する
+     */
+    function searchAndRender() {
+      const input = document.querySelector('.search-prompt input')
+      const text = input instanceof HTMLInputElement ? input.value.trim() : ''
+      if (text !== '') {
+        const results = search(text)
+        renderResults(results)
+      } else {
+        renderResults(feedItems)
+      }
+    }
+
+    /**
+     * 検索処理
+     */
+    function search(query: string) {
+      const results: FeedItem[] = []
+      feedItems.forEach((item) => {
+        if (item.title?.includes(query) || item?.description?.includes(query)) {
+          results.push(item)
+        }
+      })
+      return results
+    }
+
+    /**
+     * 検索結果をレンダリングする
+     */
+    function renderResults(results: FeedItem[]) {
+      const ul = document.querySelector('.search-result ul')
+      if (!ul) {
+        return
+      }
+      ul.innerHTML = ''
+
+      results.forEach((item) => {
+        const li = document.createElement('li')
+        const a = document.createElement('a')
+        const title = document.createElement('div')
+        const description = document.createElement('div')
+
+        title.classList.add('search-result-title')
+        title.textContent = item.title
+        description.classList.add('search-result-description')
+        description.textContent = item.description
+        a.href = item.link || ''
+
+        a.appendChild(title)
+        a.appendChild(description)
+        li.appendChild(a)
+        ul.appendChild(li)
+      })
+    }
+
+    /**
+     * RSS feed を取得する
+     * @param feedItems
+     */
+    async function fetchRSS(feedItems: FeedItem[]) {
+      const url = new URL(location.href)
+      const port = url.port ? `:${url.port}` : ''
+
+      const res = await fetch(`${url.protocol}//${url.hostname}${port}/feed`)
+      if (res.status !== 200) {
+        console.log(res.status)
+        throw new Error('Failed to fetch RSS feed')
+      }
+
+      const body = await res.text()
+
+      const parser = new DOMParser()
+      const xml = parser.parseFromString(body, 'text/xml')
+
+      Array.from(xml.getElementsByTagName('item')).forEach((item) => {
+        const title = item.getElementsByTagName('title')[0].textContent
+        const link = item.getElementsByTagName('link')[0].textContent
+        const description =
+          item.getElementsByTagName('description')[0]?.textContent
+        const pubDate = item.getElementsByTagName('pubDate')[0].textContent
+
+        feedItems.push({
+          title,
+          link,
+          description,
+          pubDate,
+        })
+      })
+
+      fetched = true
+      return feedItems
+    }
+  })
+</script>
+
+<style>
+  .search-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-prompt {
+    padding: 0 4px;
+    margin-right: 4px;
+  }
+
+  .search-prompt input {
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: var(--fg);
+    background-color: var(--input-bg);
+    border: 1px solid var(--color--cafe-au-lait);
+    border-radius: var(--radius);
+  }
+
+  .search-result {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow-y: auto;
+    border-top: 1px solid var(--hr-border);
+  }
+
+  .search-result ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* フロントでいじくって作られるタグは :global にしておかないと css が効かないので仕方ない */
+  /* stylelint-disable selector-pseudo-class-no-unknown */
+  .search-result ul > :global(li) {
+    padding: 4px;
+  }
+
+  .search-result ul > li > :global(a) {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius);
+  }
+
+  .search-result ul > li > :global(a:hover) {
+    background-color: rgb(241 241 239 / 100%);
+  }
+
+  :global(.search-result-title) {
+    padding: 0.1rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 1.2rem;
+  }
+
+  :global(.search-result-description) {
+    margin: 0 0 0.1rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.2rem;
+    color: var(--fg);
+  }
+</style>
