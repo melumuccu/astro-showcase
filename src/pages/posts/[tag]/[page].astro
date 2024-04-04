@@ -14,21 +14,33 @@ import type { SelectProperty } from '../../../lib/interfaces.ts'
 import {
   getAllTags,
   getNumberOfPagesByTag,
-  getPostsByTag,
+  getPostsByTagAndPage,
   getRankedPosts,
 } from '../../../lib/notion/client.ts'
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../server-constants.ts'
 import styles from '../../../styles/blog.module.css'
 
 export async function getStaticPaths() {
   const allTags = await getAllTags()
-  return allTags.map((tag: SelectProperty) => ({ params: { tag: tag.name } }))
+
+  let params = []
+
+  await Promise.all(
+    allTags.map((tag: SelectProperty) => {
+      return getNumberOfPagesByTag(tag.name).then((numberOfPages: number) => {
+        for (let i = 2; i <= numberOfPages; i++) {
+          params.push({ params: { tag: tag.name, page: i.toString() } })
+        }
+      })
+    })
+  )
+
+  return params
 }
 
-const { tag } = Astro.params
+const { tag, page } = Astro.params
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE, null),
+  getPostsByTagAndPage(tag, parseInt(page, 10)),
   getRankedPosts(),
   getAllTags(),
   getNumberOfPagesByTag(tag),
@@ -42,11 +54,17 @@ if (!currentTag) {
 }
 ---
 
-<Layout title={`Posts in ${tag}`} path={`/posts/tag/${tag}`}>
+<Layout
+  title={`Posts in ${tag} ${page}/${numberOfPages}`}
+  path={`/posts/${tag}/${page}`}
+>
   <div slot="main" class={styles.main}>
     <header>
       <div class="tag-container">
-        <PostTag tag={currentTag} /><span>の記事一覧</span>
+        <div class="wrap">
+          <PostTag tag={currentTag} /><span>の記事一覧</span>
+        </div>
+        <span>({page}/{numberOfPages}ページ)</span>
       </div>
     </header>
 
@@ -69,7 +87,11 @@ if (!currentTag) {
     }
 
     <footer>
-      <Pagination tag={tag} currentPage={1} numberOfPages={numberOfPages} />
+      <Pagination
+        tag={tag}
+        currentPage={parseInt(page, 10)}
+        numberOfPages={numberOfPages}
+      />
     </footer>
   </div>
 
@@ -85,13 +107,27 @@ if (!currentTag) {
 
 <style>
   .tag-container {
-    display: flex;
-    gap: 0.25rem;
-    align-items: center;
     margin: 0;
     font-size: 1.2rem;
     font-weight: normal;
     line-height: 1.3;
+  }
+
+  .tag-container > span {
+    font-size: 0.85rem;
+    color: gray;
+  }
+
+  @media (width <= 640px) {
+    .tag-container > span {
+      font-size: 0.75rem;
+    }
+  }
+
+  .wrap {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
   }
 
   @media (width <= 640px) {
