@@ -1,6 +1,6 @@
-import fs from 'node:fs'
-import { execSync } from 'child_process'
 import type { AstroIntegration } from 'astro'
+import { execSync } from 'child_process'
+import fs from 'node:fs'
 
 export default (): AstroIntegration => ({
   name: 'public-notion-copier',

@@ -1,9 +1,11 @@
 ---
-import { Post } from '../../lib/interfaces.ts'
-import { getPostByPageId } from '../../lib/notion/client'
-import { getPostLink } from '../../lib/blog-helpers.ts'
-import '../../styles/notion-color.css'
+// XXX: getPostLink が何故か消されるためここではprettier-plugin-astro-organize-importsを使用しない
+// tslint:disable:ordered-imports
 import arrow from '../../images/icon-arrow-link.svg'
+import { getPostLink } from '../../lib/blog-helpers.ts'
+import type { Post } from '../../lib/interfaces.ts'
+import { getPostByPageId } from '../../lib/notion/client'
+import '../../styles/notion-color.css'
 
 export interface Props {
   pageId: string

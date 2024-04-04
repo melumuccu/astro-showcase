@@ -1,18 +1,20 @@
 ---
-import * as interfaces from '../../lib/interfaces.ts'
+// XXX: isTweetURL が何故か消されるためここではprettier-plugin-astro-organize-importsを使用しない
+// tslint:disable:ordered-imports
 import {
-  isTweetURL,
-  isTikTokURL,
+  isCodePenURL,
   isInstagramURL,
   isPinterestURL,
-  isCodePenURL,
+  isTweetURL,
+  isTikTokURL,
 } from '../../lib/blog-helpers.ts'
+import * as interfaces from '../../lib/interfaces.ts'
 import Bookmark from './Bookmark.astro'
-import TweetEmbed from './TweetEmbed.astro'
-import TikTokEmbed from './TikTokEmbed.astro'
+import CodePenEmbed from './CodePenEmbed.astro'
 import InstagramEmbed from './InstagramEmbed.astro'
 import PinterestEmbed from './PinterestEmbed.astro'
-import CodePenEmbed from './CodePenEmbed.astro'
+import TikTokEmbed from './TikTokEmbed.astro'
+import TweetEmbed from './TweetEmbed.astro'
 
 export interface Props {
   block: interfaces.Block
