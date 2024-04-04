@@ -32,6 +32,8 @@
     "metascraper-description": "^5.34.4",
     "metascraper-image": "^5.34.4",
     "metascraper-title": "^5.34.4",
+    "prettier-plugin-astro-organize-imports": "0.4.3",
+    "prettier-plugin-organize-imports": "3.2.4",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
