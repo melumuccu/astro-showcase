@@ -1,0 +1,88 @@
+---
+import { Close } from '@/icons/index.astro'
+
+const { modalId } = Astro.props
+
+if (!modalId) {
+  console.error('Must set modalId!')
+  return
+}
+---
+
+<dialog id={modalId}>
+  <div class="dialog-content">
+    <slot />
+  </div>
+  <button class="close-dialog-button" aria-label="モーダルダイアログを閉じる">
+    <Close />
+  </button>
+</dialog>
+
+<style>
+  dialog {
+    position: fixed; /* モーダル表示時にページのスクロールがトップまで戻されないようにするため */
+    width: 60%;
+    height: 60%;
+    background-color: var(--bg);
+    border: 1px solid var(--color--cafe-au-lait);
+    border-radius: 6px;
+  }
+
+  @media (width <= 640px) {
+    dialog {
+      width: 100%;
+      height: 90%;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: #000;
+    opacity: 0.5;
+  }
+
+  .dialog-content {
+    height: 100%;
+  }
+
+  .close-dialog-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .close-dialog-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+</style>
+
+<script>
+  /**
+   * 閉じるボタンのonclick処理
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const closeDialogButtons = document.querySelectorAll('.close-dialog-button')
+    closeDialogButtons.forEach((b) => {
+      b.addEventListener('click', (e) => {
+        const dialog = (e.target as Element)?.closest('dialog')
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      })
+    })
+  })
+
+  /**
+   * オーバーレイのonclick処理
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const dialogs = document.querySelectorAll('dialog')
+    dialogs.forEach((d) => {
+      d.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('.dialog-content') === null) {
+          dialogs.forEach((d) => d.close())
+        }
+      })
+    })
+  })
+</script>

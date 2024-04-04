@@ -1,9 +1,9 @@
 ---
-import { Icon } from 'astro-icon'
+import { Search } from '@/icons/index.astro'
 ---
 
-<button class="search-button open-search-modal" type="button"
-  ><Icon name="octicon:search-24" /><span>検索</span></button
+<button class="search-button open-search-modal-button" type="button">
+  <Search width="1rem" height="1rem" /><span>検索</span></button
 >
 
 <style>
@@ -37,14 +37,27 @@ import { Icon } from 'astro-icon'
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    function handleKeydown(event) {
-      if (event.keyCode === 75 && event.metaKey) {
-        // Ctrl+K or Cmd+K
-        document.querySelector('.open-search-modal').click()
-      }
-    }
+  import { focusFirstEl } from '@/lib/focus.ts'
 
-    document.addEventListener('keydown', handleKeydown)
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('SearchModal')
+    if (modal != null && modal instanceof HTMLDialogElement) {
+      // ショートカットキー(Ctrl+K or Cmd+K)で検索モーダル表示
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'k' && e.metaKey) {
+          modal.showModal()
+          focusFirstEl(modal)
+        }
+      })
+
+      // 検索モーダル表示ボタンクリックで検索モーダル表示
+      const buttons = document.querySelectorAll('.open-search-modal-button')
+      buttons.forEach((b) => {
+        b.addEventListener('click', (e) => {
+          modal.showModal()
+          focusFirstEl(modal)
+        })
+      })
+    }
   })
 </script>

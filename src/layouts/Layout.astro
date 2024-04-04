@@ -1,7 +1,8 @@
 ---
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
 import SearchButton from '../components/SearchButton.astro'
-import SearchModal from '../components/SearchModal.astro'
+import SearchModal from '../components/modal/SearchModalV2.astro'
+
 import { filePath, getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
 import { getDatabase } from '../lib/notion/client.ts'
 import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '../server-constants.ts'
@@ -306,6 +307,10 @@ if (database.Icon && database.Icon.Type === 'file') {
     word-break: break-word;
   }
 
+  *:focus-visible {
+    outline: 0.75px auto var(--color--cafe-au-lait);
+  }
+
   html,
   body {
     padding: 0;
@@ -346,6 +351,18 @@ if (database.Icon && database.Icon.Type === 'file') {
     background-size: 50px 50px;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
+  }
+
+  /* モーダル表示中はスクロール不可とする */
+  body:has(dialog[open]) {
+    margin-right: 14px; /* スクロールバー分のマージンをとっておく */
+    overflow: hidden;
+  }
+
+  @media (width <= 640px) {
+    body:has(dialog[open]) {
+      margin-right: 0;
+    }
   }
 
   figure {
@@ -462,5 +479,14 @@ if (database.Icon && database.Icon.Type === 'file') {
     display: inline-block;
     min-height: 0.9rem;
     content: '';
+  }
+
+  button {
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
   }
 </style>
