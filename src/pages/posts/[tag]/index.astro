@@ -7,40 +7,47 @@ import PostDate from '../../../components/PostDate.astro'
 import PostExcerpt from '../../../components/PostExcerpt.astro'
 import PostFeaturedImage from '../../../components/PostFeaturedImage.astro'
 import PostTitle from '../../../components/PostTitle.astro'
+import PostTag from '../../../components/post-tag/PostTag.astro'
 import PostTags from '../../../components/post-tag/PostTags.astro'
 import Layout from '../../../layouts/Layout.astro'
+import type { SelectProperty } from '../../../lib/interfaces.ts'
 import {
   getAllTags,
-  getNumberOfPages,
-  getPostsByPage,
+  getNumberOfPagesByTag,
+  getPostsByTag,
   getRankedPosts,
 } from '../../../lib/notion/client.ts'
+import { NUMBER_OF_POSTS_PER_PAGE } from '../../../server-constants.ts'
 import styles from '../../../styles/blog.module.css'
 
 export async function getStaticPaths() {
-  const numberOfPages = await getNumberOfPages()
-
-  let params = []
-  for (let i = 2; i <= numberOfPages; i++) {
-    params.push({ params: { page: i.toString() } })
-  }
-  return params
+  const allTags = await getAllTags()
+  return allTags.map((tag: SelectProperty) => ({ params: { tag: tag.name } }))
 }
 
-const { page } = Astro.params
+const { tag } = Astro.params
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPostsByPage(parseInt(page, 10)),
+  getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE, null),
   getRankedPosts(),
   getAllTags(),
-  getNumberOfPages(),
+  getNumberOfPagesByTag(tag),
 ])
+
+const currentTag = posts[0].Tags.find((t) => t.name === tag)
+
+if (!currentTag) {
+  console.error(`Incorrect tag: ${tag}`)
+  return
+}
 ---
 
-<Layout title={`Posts ${page}/${numberOfPages}`} path={`/posts/page/${page}`}>
+<Layout title={`Posts in ${tag}`} path={`/posts/${tag}`}>
   <div slot="main" class={styles.main}>
     <header>
-      <div class="page-container">{page}/{numberOfPages}</div>
+      <div class="tag-container">
+        <PostTag tag={currentTag} /><span>の記事一覧</span>
+      </div>
     </header>
 
     {
@@ -62,10 +69,7 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
     }
 
     <footer>
-      <Pagination
-        currentPage={parseInt(page, 10)}
-        numberOfPages={numberOfPages}
-      />
+      <Pagination tag={tag} currentPage={1} numberOfPages={numberOfPages} />
     </footer>
   </div>
 
@@ -80,7 +84,10 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
 </Layout>
 
 <style>
-  .page-container {
+  .tag-container {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
     margin: 0;
     font-size: 1.2rem;
     font-weight: normal;
@@ -88,8 +95,14 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
   }
 
   @media (width <= 640px) {
-    .page-container {
+    .tag-container {
       font-size: 1.15rem;
     }
+  }
+
+  .tag-container span.tag {
+    padding: 3px 9px;
+    background: var(--tag-bg-light-gray);
+    border-radius: 4px;
   }
 </style>
