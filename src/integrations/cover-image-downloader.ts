@@ -1,5 +1,5 @@
 import type { AstroIntegration } from 'astro'
-import { getDatabase, downloadFile } from '../lib/notion/client'
+import { downloadFile, getDatabase } from '../lib/notion/client'
 
 export default (): AstroIntegration => ({
   name: 'cover-image-downloader',

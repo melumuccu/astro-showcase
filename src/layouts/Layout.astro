@@ -1,10 +1,10 @@
 ---
-import { PUBLIC_GA_TRACKING_ID, ENABLE_LIGHTBOX } from '../server-constants.ts'
-import { getDatabase } from '../lib/notion/client.ts'
-import { getNavLink, getStaticFilePath, filePath } from '../lib/blog-helpers.ts'
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
-import SearchModal from '../components/SearchModal.astro'
 import SearchButton from '../components/SearchButton.astro'
+import SearchModal from '../components/SearchModal.astro'
+import { filePath, getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
+import { getDatabase } from '../lib/notion/client.ts'
+import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '../server-constants.ts'
 import '../styles/color.css'
 export interface Props {
   title: string

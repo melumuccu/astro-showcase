@@ -2,11 +2,11 @@ import fetch from 'node-fetch'
 import { BASE_PATH, REQUEST_TIMEOUT_MS } from '../server-constants'
 import type {
   Block,
+  Column,
   Heading1,
   Heading2,
   Heading3,
   RichText,
-  Column,
 } from './interfaces'
 import { pathJoin } from './utils'
 

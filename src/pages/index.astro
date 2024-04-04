@@ -1,23 +1,22 @@
 ---
-import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
-import {
-  getPosts,
-  getRankedPosts,
-  getAllTags,
-  getNumberOfPages,
-} from '../lib/notion/client.ts'
-import Layout from '../layouts/Layout.astro'
-import NoContents from '../components/NoContents.astro'
-import PostDate from '../components/PostDate.astro'
-import PostTags from '../components/post-tag/PostTags.astro'
-import PostTitle from '../components/PostTitle.astro'
-import PostFeaturedImage from '../components/PostFeaturedImage.astro'
-import PostExcerpt from '../components/PostExcerpt.astro'
-import Pagination from '../components/Pagination.astro'
 import BlogPostsLink from '../components/BlogPostsLink.astro'
 import BlogTagsLink from '../components/BlogTagsLink.astro'
+import NoContents from '../components/NoContents.astro'
+import Pagination from '../components/Pagination.astro'
+import PostDate from '../components/PostDate.astro'
+import PostExcerpt from '../components/PostExcerpt.astro'
+import PostFeaturedImage from '../components/PostFeaturedImage.astro'
+import PostTitle from '../components/PostTitle.astro'
+import PostTags from '../components/post-tag/PostTags.astro'
+import Layout from '../layouts/Layout.astro'
+import {
+  getAllTags,
+  getNumberOfPages,
+  getPosts,
+  getRankedPosts,
+} from '../lib/notion/client.ts'
+import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
 import styles from '../styles/blog.module.css'
-import { getPostLink } from '../lib/blog-helpers.ts'
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
   getPosts(NUMBER_OF_POSTS_PER_PAGE),
