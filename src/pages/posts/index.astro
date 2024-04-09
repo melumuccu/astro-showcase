@@ -9,7 +9,6 @@ import PostExcerpt from '../../components/PostExcerpt.astro'
 import PostFeaturedImage from '../../components/PostFeaturedImage.astro'
 import PostTitle from '../../components/PostTitle.astro'
 import PostTags from '../../components/post-tag/PostTags.astro'
-import Layout from '../../layouts/Layout.astro'
 import {
   getAllTags,
   getNumberOfPages,
@@ -17,6 +16,7 @@ import {
   getRankedPosts,
 } from '../../lib/notion/client.ts'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../server-constants.ts'
+import Layout from './Layout.astro'
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
   getPosts(NUMBER_OF_POSTS_PER_PAGE),
