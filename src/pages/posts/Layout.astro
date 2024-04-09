@@ -14,7 +14,7 @@ import {
   ENABLE_LIGHTBOX,
   PUBLIC_GA_TRACKING_ID,
 } from '../../server-constants.ts'
-import '../styles/color.css'
+import '../../styles/color.css'
 export interface Props {
   title: string
   description: string
@@ -33,15 +33,6 @@ const siteOGImage = new URL(
   getStaticFilePath('/default-og-image.png'),
   Astro.site
 )
-
-let customIconURL: string
-if (database.Icon && database.Icon.Type === 'file') {
-  try {
-    customIconURL = filePath(new URL(database.Icon.Url))
-  } catch (err) {
-    console.log('Invalid DB custom icon URL')
-  }
-}
 ---
 
 <!doctype html>
