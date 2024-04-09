@@ -3,6 +3,7 @@ import GoogleAnalytics from '../components/GoogleAnalytics.astro'
 import SearchButton from '../components/SearchButton.astro'
 import SearchModal from '../components/modal/SearchModal.astro'
 
+import CoverImage from '../components/CoverImage.astro'
 import { filePath, getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
 import { getDatabase } from '../lib/notion/client.ts'
 import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '../server-constants.ts'
@@ -25,22 +26,6 @@ const siteOGImage = new URL(
   getStaticFilePath('/default-og-image.png'),
   Astro.site
 )
-
-let coverImageURL: string
-if (database.Cover) {
-  if (database.Cover.Type === 'external') {
-    coverImageURL = database.Cover.Url
-  } else if (database.Cover.Type === 'file') {
-    try {
-      // 開発環境ではNotionからそのまま画像を引っ張ってくる。それ以外では事前にNotionから引っ張ってきて自サイトに保持しておいた画像を利用する。
-      coverImageURL = import.meta.env.DEV
-        ? database.Cover.Url
-        : filePath(new URL(database.Cover.Url))
-    } catch (err) {
-      console.log('Invalid DB cover image URL')
-    }
-  }
-}
 
 let customIconURL: string
 if (database.Icon && database.Icon.Type === 'file') {
@@ -89,15 +74,7 @@ if (database.Icon && database.Icon.Type === 'file') {
   <body>
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <div class="container">
-      <header>
-        {
-          coverImageURL && (
-            <div class="cover">
-              <img src={coverImageURL} alt="Site cover image" loading="lazy" />
-            </div>
-          )
-        }
-      </header>
+      <CoverImage Cover={database.Cover} />
 
       <div>
         <main>
@@ -218,14 +195,6 @@ if (database.Icon && database.Icon.Type === 'file') {
     margin-left: -0.3rem;
     font-size: 1.1em;
     vertical-align: sub;
-  }
-
-  div.cover img {
-    display: block;
-    width: 100%;
-    height: 20vh;
-    object-fit: cover;
-    object-position: center 60%;
   }
 
   main header h1 a img.custom-icon {
