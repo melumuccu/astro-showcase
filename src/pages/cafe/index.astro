@@ -1,0 +1,26 @@
+---
+import Layout from './Layout.astro'
+
+const title = 'HACKsaw@cafe 椎ノ樹'
+const subtitle = '~珈琲と軽食、落ち着く空間~'
+const description =
+  '【cafe 椎ノ樹】は新鮮な珈琲を1杯ずつ挽きたてでご提供。エスプレッソマシンでの高圧抽出による、手で淹れる珈琲には出せない魅力と共に、ちょっとした手作り軽食をお楽しみください。'
+---
+
+<Layout title={`${title} ${subtitle}`} description={description} path="/">
+  <div slot="main">
+    <header>
+      <h1 class="zen-antique-soft-regular">{title}<br />{subtitle}</h1>
+      <p>{description}</p>
+    </header>
+  </div>
+  <div slot="aside">aside</div>
+</Layout>
+
+<style>
+  .zen-antique-soft-regular {
+    font-family: 'Zen Antique Soft', serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+</style>
