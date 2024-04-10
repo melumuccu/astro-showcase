@@ -1,0 +1,51 @@
+---
+
+---
+
+<div class="visibleOnScroll">
+  <slot name="content" />
+</div>
+
+<style>
+  .visibleOnScroll {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .visibleOnScroll.visible {
+    transition:
+      opacity 0.75s ease-out,
+      transform 0.75s ease-out; /* アニメーションの定義 */
+    opacity: 1; /* 透明度を1にして表示 */
+    transform: translateY(0); /* 元の位置に移動 */
+  }
+</style>
+
+<script>
+  // 全ての.visibleOnScrollコンポーネントを取得(ただし.visibleは除く)
+  const visibleOnScrollComponents = document.querySelectorAll(
+    '.visibleOnScroll:not(.visible)'
+  )
+
+  // スクロールイベントを監視
+  window.addEventListener('scroll', () => {
+    visibleOnScrollComponents.forEach((c) => {
+      if (!isElementInViewport(c)) {
+        return
+      }
+      // 要素が画面内に入ったら
+      c.classList.add('visible')
+    })
+  })
+
+  /**
+   * スクロールにより対象の要素が表示されたか判定
+   * @param el
+   */
+  function isElementInViewport(el: Element) {
+    const viewportHeight = window.innerHeight
+    const elementTop = el.getBoundingClientRect().top
+
+    // 画面全体の90%までスクロールしたら表示
+    return elementTop <= viewportHeight * 0.9
+  }
+</script>
