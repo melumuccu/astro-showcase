@@ -24,7 +24,7 @@ import {
   getRankedPosts,
 } from '../../lib/notion/client.ts'
 import styles from '../../styles/blog.module.css'
-import Layout from './Layout.astro'
+import Layout from './_Layout.astro'
 
 export async function getStaticPaths() {
   const posts = await getAllPosts()

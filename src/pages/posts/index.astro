@@ -16,7 +16,7 @@ import {
   getRankedPosts,
 } from '../../lib/notion/client.ts'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../server-constants.ts'
-import Layout from './Layout.astro'
+import Layout from './_Layout.astro'
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
   getPosts(NUMBER_OF_POSTS_PER_PAGE),
