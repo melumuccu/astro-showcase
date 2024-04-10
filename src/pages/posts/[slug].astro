@@ -6,7 +6,6 @@ import PostDate from '../../components/PostDate.astro'
 import PostRelativeLink from '../../components/PostRelativeLink.astro'
 import PostTitle from '../../components/PostTitle.astro'
 import PostTags from '../../components/post-tag/PostTags.astro'
-import Layout from '../../layouts/Layout.astro'
 import {
   extractTargetBlocks,
   filePath,
@@ -25,6 +24,7 @@ import {
   getRankedPosts,
 } from '../../lib/notion/client.ts'
 import styles from '../../styles/blog.module.css'
+import Layout from './_Layout.astro'
 
 export async function getStaticPaths() {
   const posts = await getAllPosts()

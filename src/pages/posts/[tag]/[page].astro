@@ -9,7 +9,6 @@ import PostFeaturedImage from '../../../components/PostFeaturedImage.astro'
 import PostTitle from '../../../components/PostTitle.astro'
 import PostTag from '../../../components/post-tag/PostTag.astro'
 import PostTags from '../../../components/post-tag/PostTags.astro'
-import Layout from '../../../layouts/Layout.astro'
 import type { SelectProperty } from '../../../lib/interfaces.ts'
 import {
   getAllTags,
@@ -18,6 +17,7 @@ import {
   getRankedPosts,
 } from '../../../lib/notion/client.ts'
 import styles from '../../../styles/blog.module.css'
+import Layout from '../_Layout.astro'
 
 export async function getStaticPaths() {
   const allTags = await getAllTags()

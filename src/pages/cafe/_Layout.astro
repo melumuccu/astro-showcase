@@ -1,59 +1,52 @@
 ---
-import GoogleAnalytics from '../components/GoogleAnalytics.astro'
-import SearchButton from '../components/SearchButton.astro'
-import SearchModal from '../components/modal/SearchModal.astro'
+import GoogleAnalytics from '../../components/GoogleAnalytics.astro'
+import {
+  filePath,
+  getNavLink,
+  getStaticFilePath,
+} from '../../lib/blog-helpers.ts'
+import { SITE_NAME } from '../../meta-settings.ts'
+import {
+  ENABLE_LIGHTBOX,
+  PUBLIC_GA_TRACKING_ID,
+} from '../../server-constants.ts'
+import '../../styles/color.css'
 
-import CoverImage from '../components/CoverImage.astro'
-import { filePath, getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
-import { getDatabase } from '../lib/notion/client.ts'
-import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '../server-constants.ts'
-import '../styles/color.css'
 export interface Props {
   title: string
   description: string
   path: string
-  ogImage: string
+  ogImage?: string
 }
 
-const { title = '', description = '', path = '/', ogImage = '' } = Astro.props
+const { title, description, path, ogImage } = Astro.props as Props
 
-const database = await getDatabase()
-
-const siteTitle = title ? `${title} - ${database.Title}` : database.Title
-const siteDescription = description ? description : database.Description
 const siteURL = new URL(getNavLink(path), Astro.site).toString()
+// TODO 画像差し替え
 const siteOGImage = new URL(
   getStaticFilePath('/default-og-image.png'),
   Astro.site
 )
-
-let customIconURL: string
-if (database.Icon && database.Icon.Type === 'file') {
-  try {
-    customIconURL = filePath(new URL(database.Icon.Url))
-  } catch (err) {
-    console.log('Invalid DB custom icon URL')
-  }
-}
 ---
 
 <!doctype html>
+<!-- TODO BaseLayout作成 -->
 <html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="max-image-preview:large" />
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
-    <title>{siteTitle}</title>
-    <meta name="description" content={siteDescription} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <link rel="canonical" href={siteURL} />
     <meta property="og:url" content={siteURL} />
-    <meta property="og:title" content={siteTitle} />
-    <meta property="og:description" content={siteDescription} />
-    <meta property="og:site_name" content={database.Title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:image" content={ogImage || siteOGImage} />
-    <meta name="twitter:title" content={siteTitle} />
-    <meta name="twitter:description" content={siteDescription} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage || siteOGImage} />
     <link
@@ -74,22 +67,9 @@ if (database.Icon && database.Icon.Type === 'file') {
   <body>
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <div class="container">
-      <CoverImage Cover={database.Cover} />
-
       <div>
         <main>
           <div class="content">
-            <header>
-              <h1 class="zen-antique-soft-regular">
-                <a href={getNavLink('/posts')}>
-                  {database.Title}
-                </a>
-              </h1>
-              <div class="description">
-                {database.Description}
-              </div>
-            </header>
-
             <slot name="main" />
 
             <footer>
@@ -104,13 +84,11 @@ if (database.Icon && database.Icon.Type === 'file') {
         </main>
 
         <aside>
-          <SearchButton />
           <slot name="aside" />
         </aside>
       </div>
     </div>
 
-    <SearchModal />
     {
       ENABLE_LIGHTBOX && (
         <script src={getStaticFilePath('/scripts/fslightbox.js')} />
@@ -146,6 +124,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     flex: 1;
     justify-content: space-between;
     order: 2;
+    background-image: url('src/images/bg-2.png');
   }
 
   @media (width <= 640px) {
@@ -257,9 +236,9 @@ if (database.Icon && database.Icon.Type === 'file') {
     --gap: 1rem;
     --gap-double: 2rem;
     --bg: #fff;
-    --fg: #333;
-    --accents-1: #666;
-    --accents-2: #666;
+    --fg: #c4c4c4;
+    --accents-1: #5c5c5c;
+    --accents-2: #ebebeb;
     --accents-3: #666;
     --geist-foreground: #000;
     --geist-success: #690;
@@ -381,7 +360,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.8rem;
-    color: #222;
+    color: var(--fg);
   }
 
   ul,

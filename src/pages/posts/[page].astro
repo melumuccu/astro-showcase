@@ -8,7 +8,6 @@ import PostExcerpt from '../../components/PostExcerpt.astro'
 import PostFeaturedImage from '../../components/PostFeaturedImage.astro'
 import PostTitle from '../../components/PostTitle.astro'
 import PostTags from '../../components/post-tag/PostTags.astro'
-import Layout from '../../layouts/Layout.astro'
 import {
   getAllTags,
   getNumberOfPages,
@@ -16,6 +15,7 @@ import {
   getRankedPosts,
 } from '../../lib/notion/client.ts'
 import styles from '../../styles/blog.module.css'
+import Layout from './_Layout.astro'
 
 export async function getStaticPaths() {
   const numberOfPages = await getNumberOfPages()
