@@ -44,7 +44,4 @@ export default defineConfig({
   redirects: {
     '/': '/posts',
   },
-  build: {
-    inlineStylesheets: 'always',
-  },
 });
