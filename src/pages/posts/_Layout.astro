@@ -4,8 +4,7 @@ import PoweredBy from '../../components/PoweredBy.astro'
 import SearchButton from '../../components/SearchButton.astro'
 import SearchModal from '../../components/modal/SearchModal.astro'
 
-import '@/styles/vars-global.css'
-import '@/styles/vars-posts.css'
+import '@/styles/global-var.css'
 import CoverImage from '../../components/CoverImage.astro'
 import { getNavLink, getStaticFilePath } from '../../lib/blog-helpers.ts'
 import { getDatabase } from '../../lib/notion/client.ts'
@@ -179,5 +178,15 @@ const siteOGImage = new URL(
     font-family: 'Zen Antique Soft', serif;
     font-style: normal;
     font-weight: 400;
+  }
+</style>
+
+<style is:global>
+  :root {
+    /* override */
+    --fg: #333;
+    --accents-1: #666;
+    --accents-2: #666;
+    --accents-3: #666;
   }
 </style>
