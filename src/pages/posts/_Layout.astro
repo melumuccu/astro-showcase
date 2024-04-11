@@ -1,5 +1,6 @@
 ---
 import GoogleAnalytics from '../../components/GoogleAnalytics.astro'
+import PoweredBy from '../../components/PoweredBy.astro'
 import SearchButton from '../../components/SearchButton.astro'
 import SearchModal from '../../components/modal/SearchModal.astro'
 
@@ -92,12 +93,7 @@ const siteOGImage = new URL(
             <slot name="main" />
 
             <footer>
-              <div>
-                <span>Powered by&nbsp;</span>
-                <a href="https://github.com/otoyo/astro-notion-blog"
-                  >astro-notion-blog</a
-                >
-              </div>
+              <PoweredBy />
             </footer>
           </div>
         </main>
@@ -205,32 +201,11 @@ const siteOGImage = new URL(
     font-size: 0.95rem;
   }
 
-  main footer {
-    margin: 30px 0 10px;
-    font-size: 0.75rem;
-    text-align: center;
-  }
-
-  @media (width <= 640px) {
-    main footer {
-      margin: 0 auto 30px;
-    }
-  }
-
-  main footer span {
-    color: #777;
-  }
-
   main header h1 a span {
     display: inline-block;
     margin-right: 0.3em;
     margin-left: -0.1rem;
     font-size: 1.1em;
-  }
-
-  main footer a {
-    color: inherit;
-    text-decoration: underline;
   }
 
   main header h1 a {
