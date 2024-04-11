@@ -71,16 +71,6 @@ const siteOGImage = new URL(
 </GlobalLayout>
 
 <style>
-  :root {
-    /* override */
-    --fg: #333;
-    --accents-1: #666;
-    --accents-2: #666;
-    --accents-3: #666;
-  }
-</style>
-
-<style>
   .container {
     min-height: 100vh;
     background-color: rgb(var(--color--cafe-au-lait--rgb) / 15%);
@@ -187,5 +177,15 @@ const siteOGImage = new URL(
     font-family: 'Zen Antique Soft', serif;
     font-style: normal;
     font-weight: 400;
+  }
+</style>
+
+<style is:global>
+  :root {
+    /* override */
+    --fg: #333;
+    --accents-1: #666;
+    --accents-2: #666;
+    --accents-3: #666;
   }
 </style>
