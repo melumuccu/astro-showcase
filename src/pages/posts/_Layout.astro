@@ -72,6 +72,12 @@ const siteOGImage = new URL(
 
 <style>
   .container {
+    /* override */
+    --fg: #333;
+    --accents-1: #666;
+    --accents-2: #666;
+    --accents-3: #666;
+
     min-height: 100vh;
     background-color: rgb(var(--color--cafe-au-lait--rgb) / 15%);
   }
@@ -182,10 +188,5 @@ const siteOGImage = new URL(
 
 <style is:global>
   :root {
-    /* override */
-    --fg: #333;
-    --accents-1: #666;
-    --accents-2: #666;
-    --accents-3: #666;
   }
 </style>
