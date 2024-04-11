@@ -1,0 +1,19 @@
+:root {
+  --gap-quarter: 0.25rem;
+  --gap-half: 0.5rem;
+  --gap: 1rem;
+  --gap-double: 2rem;
+  --bg: #fff;
+  --fg: #c4c4c4;
+  --accents-1: #5c5c5c;
+  --accents-2: #ebebeb;
+  --accents-3: #666;
+  --geist-foreground: #000;
+  --geist-success: #690;
+  --radius: 4px;
+  --font-sans: -apple-system, blinkmacsystemfont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-mono: sfmono-regular, menlo, consolas, 'PT Mono', 'Liberation Mono',
+    courier, monospace;
+}
