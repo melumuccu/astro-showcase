@@ -45,6 +45,6 @@ export default defineConfig({
     '/': '/posts',
   },
   build: {
-    inlineStylesheets: 'never',
+    inlineStylesheets: 'always',
   },
 });
