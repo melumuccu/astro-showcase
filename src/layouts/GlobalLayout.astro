@@ -1,0 +1,281 @@
+---
+import { SITE_NAME } from '@/meta-settings'
+
+import GoogleAnalytics from '@/components/GoogleAnalytics.astro'
+import { getStaticFilePath } from '@/lib/blog-helpers.ts'
+import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '@/server-constants'
+import '@/styles/color.css'
+
+export interface Props {
+  title: string
+  description: string
+  siteURL: string
+  ogImage?: string
+  siteOGImage?: URL
+}
+
+const { title, description, siteURL, ogImage, siteOGImage } =
+  Astro.props as Props
+---
+
+<!doctype html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta charset="UTF-8" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={siteURL} />
+    <meta property="og:url" content={siteURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:image" content={ogImage || siteOGImage} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage || siteOGImage} />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+      integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0"
+      crossorigin="anonymous"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Google Fonts: Zen Antique Soft -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap"
+      rel="stylesheet"
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
+    <slot name="body" />
+    {
+      ENABLE_LIGHTBOX && (
+        <script src={getStaticFilePath('/scripts/fslightbox.js')} />
+      )
+    }
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --gap-quarter: 0.25rem;
+    --gap-half: 0.5rem;
+    --gap: 1rem;
+    --gap-double: 2rem;
+    --bg: #fff;
+    --fg: #c4c4c4;
+    --accents-1: #5c5c5c;
+    --accents-2: #ebebeb;
+    --accents-3: #666;
+    --geist-foreground: #000;
+    --geist-success: #690;
+    --radius: 4px;
+    --font-sans: -apple-system, blinkmacsystemfont, 'Segoe UI', 'Roboto',
+      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+      'Helvetica Neue', sans-serif;
+    --font-mono: sfmono-regular, menlo, consolas, 'PT Mono', 'Liberation Mono',
+      courier, monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+
+  *:focus-visible {
+    outline: 0.75px auto var(--color--cafe-au-lait);
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  body {
+    min-height: 100vh;
+
+    /* Hack */
+    overflow-x: hidden;
+    font-family:
+      ui-sans-serif,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Helvetica,
+      'Hiragino Sans',
+      'Hiragino Kaku Gothic ProN',
+      'Hiragino Sans GB',
+      'メイリオ',
+      Meiryo,
+      'Apple Color Emoji',
+      Arial,
+      sans-serif,
+      'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    color: var(--fg);
+    background: var(--bg);
+    background-attachment: fixed;
+
+    /* background-image: radial-gradient(#ddd 1px, transparent 1px),
+      radial-gradient(#ddd 1px, transparent 1px); */
+    background-position:
+      0 0,
+      25px 25px;
+    background-size: 50px 50px;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+  }
+
+  /* モーダル表示中はスクロール不可とする */
+  body:has(dialog[open]) {
+    margin-right: 14px; /* スクロールバー分のマージンをとっておく */
+    overflow: hidden;
+  }
+
+  @media (width <= 640px) {
+    body:has(dialog[open]) {
+      margin-right: 0;
+    }
+  }
+
+  figure {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.8rem;
+    color: #999;
+  }
+
+  a {
+    color: var(--accents-1);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--accents-1);
+  }
+
+  mark {
+    padding: var(--gap-quarter);
+    background: rgb(247 212 255 / 80%);
+    border-radius: var(--radius);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  @media (width <= 640px) {
+    h1 {
+      font-size: 1.6rem;
+    }
+  }
+
+  ol {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+    color: #222;
+  }
+
+  p,
+  ul {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+    color: var(--fg);
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 1.5rem;
+    margin: 0;
+  }
+
+  pre {
+    margin: 0;
+    tab-size: 2;
+    white-space: pre;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  pre :global(code) {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  hr {
+    display: block;
+    height: 1px;
+    margin: 0.3rem 0;
+    background-color: #333;
+    border: 0;
+  }
+
+  code {
+    padding: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #eb5757;
+    background: rgb(135 131 120 / 15%);
+    border-radius: var(--radius);
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-collapse: collapse;
+  }
+
+  table tr {
+    vertical-align: top;
+  }
+
+  table th {
+    font-weight: 600;
+    background-color: #f4f4f4;
+  }
+
+  table td,
+  table th {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    text-align: left;
+    border: 1px solid #e4e4e4;
+  }
+
+  table td::after {
+    display: inline-block;
+    min-height: 0.9rem;
+    content: '';
+  }
+
+  button {
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  .zen-antique-soft-regular {
+    font-family: 'Zen Antique Soft', serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+</style>

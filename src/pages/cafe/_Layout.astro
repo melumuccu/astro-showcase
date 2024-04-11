@@ -1,17 +1,7 @@
 ---
-import GoogleAnalytics from '../../components/GoogleAnalytics.astro'
+import GlobalLayout from '@/layouts/GlobalLayout.astro'
 import PoweredBy from '../../components/PoweredBy.astro'
-import {
-  filePath,
-  getNavLink,
-  getStaticFilePath,
-} from '../../lib/blog-helpers.ts'
-import { SITE_NAME } from '../../meta-settings.ts'
-import {
-  ENABLE_LIGHTBOX,
-  PUBLIC_GA_TRACKING_ID,
-} from '../../server-constants.ts'
-import '../../styles/color.css'
+import { getNavLink, getStaticFilePath } from '../../lib/blog-helpers.ts'
 
 export interface Props {
   title: string
@@ -30,407 +20,46 @@ const siteOGImage = new URL(
 )
 ---
 
-<!doctype html>
-<!-- TODO BaseLayout作成 -->
-<html lang="en" prefix="og: https://ogp.me/ns#">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="max-image-preview:large" />
-    <meta charset="UTF-8" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={siteURL} />
-    <meta property="og:url" content={siteURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:image" content={ogImage || siteOGImage} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={ogImage || siteOGImage} />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
-      integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0"
-      crossorigin="anonymous"
-    />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Google Fonts: Zen Antique Soft -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
-    <div class="container">
-      <div>
-        <main>
-          <div class="content">
-            <slot name="main" />
+<GlobalLayout
+  title={title}
+  description={description}
+  siteURL={siteURL}
+  ogImage={ogImage}
+  siteOGImage={siteOGImage}
+>
+  <main slot="body">
+    <slot name="main" />
 
-            <footer>
-              <PoweredBy />
-            </footer>
-          </div>
-        </main>
-
-        <aside>
-          <slot name="aside" />
-        </aside>
-      </div>
-    </div>
-
-    {
-      ENABLE_LIGHTBOX && (
-        <script src={getStaticFilePath('/scripts/fslightbox.js')} />
-      )
-    }
-  </body>
-</html>
+    <footer>
+      <PoweredBy />
+    </footer>
+  </main>
+</GlobalLayout>
 
 <style>
-  .container {
-    min-height: 100vh;
-    background-color: rgb(var(--color--cafe-au-lait--rgb) / 15%);
-  }
-
-  .container > div {
-    display: flex;
-    max-width: 1280px;
-  }
-
-  @media (width <= 640px) {
-    .container > div {
-      display: block;
-    }
-  }
-
-  @media (width <= 640px) {
-    .container > header {
-      --border-line-widrh: 6px;
-    }
-  }
-
   main {
-    flex: 1;
-    justify-content: space-between;
-    order: 2;
+    max-width: 100vw;
+    min-height: 100vh;
+    padding: 20px 40px;
+    background-color: rgb(var(--color--cafe-au-lait--rgb) / 15%);
     background-image: url('src/images/bg-2.png');
   }
 
   @media (width <= 640px) {
     main {
-      order: 1;
-    }
-  }
-
-  aside {
-    order: 1;
-    width: 300px;
-    padding: 52px 20px 20px;
-    background-color: #bbbbbb4a;
-  }
-
-  @media (width <= 640px) {
-    aside {
-      order: 2;
-      width: 100%;
-    }
-  }
-
-  div.content {
-    padding: 20px 40px;
-  }
-
-  @media (width <= 640px) {
-    div.content {
       padding: 0 18px;
     }
   }
 
-  main header {
-    padding: 20px 0;
-  }
-
-  main header h1 {
-    font-weight: 700;
-    color: #333;
-  }
-
-  main header h1 a img {
-    display: inline-block;
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.2em;
-    margin-left: -0.3rem;
-    font-size: 1.1em;
-    vertical-align: sub;
-  }
-
-  main header h1 a img.custom-icon {
-    border-radius: var(--radius);
-  }
-
-  main header div.description {
-    padding: 0.3rem 0 0.6rem;
-    font-size: 0.95rem;
-  }
-
-  main footer {
+  footer {
     margin: 30px 0 10px;
     font-size: 0.75rem;
     text-align: center;
   }
 
   @media (width <= 640px) {
-    main footer {
+    footer {
       margin: 0 auto 30px;
     }
-  }
-
-  main footer span {
-    color: #777;
-  }
-
-  main header h1 a span {
-    display: inline-block;
-    margin-right: 0.3em;
-    margin-left: -0.1rem;
-    font-size: 1.1em;
-  }
-
-  main footer a {
-    color: inherit;
-    text-decoration: underline;
-  }
-
-  main header h1 a {
-    display: block;
-    color: inherit;
-  }
-
-  main header h1 a:hover {
-    color: inherit;
-  }
-
-  .zen-antique-soft-regular {
-    font-family: 'Zen Antique Soft', serif;
-    font-style: normal;
-    font-weight: 400;
-  }
-</style>
-
-<style is:global>
-  :root {
-    --gap-quarter: 0.25rem;
-    --gap-half: 0.5rem;
-    --gap: 1rem;
-    --gap-double: 2rem;
-    --bg: #fff;
-    --fg: #c4c4c4;
-    --accents-1: #5c5c5c;
-    --accents-2: #ebebeb;
-    --accents-3: #666;
-    --geist-foreground: #000;
-    --geist-success: #690;
-    --radius: 4px;
-    --font-sans: -apple-system, blinkmacsystemfont, 'Segoe UI', 'Roboto',
-      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
-    --font-mono: sfmono-regular, menlo, consolas, 'PT Mono', 'Liberation Mono',
-      courier, monospace;
-  }
-
-  * {
-    box-sizing: border-box;
-    word-break: break-word;
-  }
-
-  *:focus-visible {
-    outline: 0.75px auto var(--color--cafe-au-lait);
-  }
-
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-size: 16px;
-  }
-
-  body {
-    min-height: 100vh;
-
-    /* Hack */
-    overflow-x: hidden;
-    font-family:
-      ui-sans-serif,
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Helvetica,
-      'Hiragino Sans',
-      'Hiragino Kaku Gothic ProN',
-      'Hiragino Sans GB',
-      'メイリオ',
-      Meiryo,
-      'Apple Color Emoji',
-      Arial,
-      sans-serif,
-      'Segoe UI Emoji',
-      'Segoe UI Symbol';
-    color: var(--fg);
-    background: var(--bg);
-    background-attachment: fixed;
-
-    /* background-image: radial-gradient(#ddd 1px, transparent 1px),
-      radial-gradient(#ddd 1px, transparent 1px); */
-    background-position:
-      0 0,
-      25px 25px;
-    background-size: 50px 50px;
-    -webkit-font-smoothing: antialiased;
-    text-size-adjust: 100%;
-  }
-
-  /* モーダル表示中はスクロール不可とする */
-  body:has(dialog[open]) {
-    margin-right: 14px; /* スクロールバー分のマージンをとっておく */
-    overflow: hidden;
-  }
-
-  @media (width <= 640px) {
-    body:has(dialog[open]) {
-      margin-right: 0;
-    }
-  }
-
-  figure {
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.8rem;
-    color: #999;
-  }
-
-  a {
-    color: var(--accents-1);
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: var(--accents-1);
-  }
-
-  mark {
-    padding: var(--gap-quarter);
-    background: rgb(247 212 255 / 80%);
-    border-radius: var(--radius);
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--fg);
-  }
-
-  @media (width <= 640px) {
-    h1 {
-      font-size: 1.6rem;
-    }
-  }
-
-  ol {
-    font-size: 0.9rem;
-    font-weight: 400;
-    line-height: 1.8rem;
-    color: #222;
-  }
-
-  p,
-  ul {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.8rem;
-    color: var(--fg);
-  }
-
-  ul,
-  ol {
-    padding-inline-start: 1.5rem;
-    margin: 0;
-  }
-
-  pre {
-    margin: 0;
-    tab-size: 2;
-    white-space: pre;
-  }
-
-  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-  pre :global(code) {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  hr {
-    display: block;
-    height: 1px;
-    margin: 0.3rem 0;
-    background-color: #333;
-    border: 0;
-  }
-
-  code {
-    padding: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: #eb5757;
-    background: rgb(135 131 120 / 15%);
-    border-radius: var(--radius);
-  }
-
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    border-collapse: collapse;
-  }
-
-  table tr {
-    vertical-align: top;
-  }
-
-  table th {
-    font-weight: 600;
-    background-color: #f4f4f4;
-  }
-
-  table td,
-  table th {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    line-height: 1.2rem;
-    text-align: left;
-    border: 1px solid #e4e4e4;
-  }
-
-  table td::after {
-    display: inline-block;
-    min-height: 0.9rem;
-    content: '';
-  }
-
-  button {
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    background: none;
-    border: none;
-    outline: none;
   }
 </style>
