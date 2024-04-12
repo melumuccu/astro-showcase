@@ -1,0 +1,60 @@
+---
+import logo from '@/icons/logos/logo.png'
+import { Image } from 'astro:assets'
+---
+
+<a href="/cafe" class="logo-link">
+  <div class="logo-base round bg-cream">
+    <Image src={logo} height="40" alt="" />
+  </div>
+  <h1 class="logo-rabel">
+    <span class="-small">cafe</span><span class="-large">椎ノ樹</span>
+  </h1>
+</a>
+
+<style>
+  .logo-link {
+    display: inline-flex;
+    gap: 8px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 8px 8px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .logo-base {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    aspect-ratio: 1 / 1;
+    border: 4px double #000;
+  }
+
+  .round {
+    border-radius: 50%;
+  }
+
+  .bg-cream {
+    background-color: #d4a888;
+  }
+
+  .logo-rabel {
+    --font-base-size: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    line-height: 1;
+
+    .-small {
+      font-size: var(--font-base-size);
+    }
+
+    .-large {
+      font-size: calc(var(--font-base-size) * 1.5);
+      font-weight: bold;
+    }
+  }
+</style>

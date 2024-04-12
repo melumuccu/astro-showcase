@@ -1,0 +1,56 @@
+---
+import LinkItem from '@/components/header/LinkItem.astro'
+import LinkList from '@/components/header/LinkList.astro'
+import LogoCafe from '@/components/header/LogoCafe.astro'
+import SnsItem from '@/components/header/SnsItem.astro'
+---
+
+<header class="fonts new-tegomin-regular">
+  <LogoCafe />
+
+  <section class="links">
+    <LinkList outline="Cafe" left="-10px">
+      <LinkItem link="/cafe" label="Home" />
+      <LinkItem link="/posts/cafe-info" label="info" />
+    </LinkList>
+    <LinkList outline="Tech">
+      <!-- <LinkItem link="/" label="Home" /> -->
+      <LinkItem link="/posts/tech" label="blog" />
+    </LinkList>
+    <LinkList outline="Other">
+      <LinkItem link="/posts" label="記事一覧" />
+    </LinkList>
+    <LinkList outline="SNS" top="-35px" left="-10px">
+      <SnsItem sns="x" />
+      <SnsItem sns="instagram" />
+      <SnsItem sns="github" />
+    </LinkList>
+  </section>
+</header>
+
+<style>
+  header {
+    --list-min-height: 40px;
+
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-10000);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: rgb(var(----color--cafe-au-lait--rgb) 0.8);
+  }
+
+  .links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  hr {
+    height: 1.5rem;
+    border-right: 1px solid var(--fg);
+  }
+</style>
