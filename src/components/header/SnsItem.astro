@@ -1,19 +1,33 @@
 ---
-const snsLinkMap = {
-  x: 'https://twitter.com/sawa20221022',
-  instagram: '',
-  github: 'https://github.com/melumuccu',
+import iconGithub from '@/icons/logos/github.png'
+import iconInstagram from '@/icons/logos/instagram.png'
+import iconX from '@/icons/logos/x.png'
+import { Image } from 'astro:assets'
+
+const snsMap = {
+  x: {
+    link: 'https://twitter.com/sawa20221022',
+    icon: iconX,
+  },
+  instagram: {
+    link: '',
+    icon: iconInstagram,
+  },
+  github: {
+    link: 'https://github.com/melumuccu',
+    icon: iconGithub,
+  },
 }
 type Props = {
-  sns: keyof typeof snsLinkMap
+  sns: keyof typeof snsMap
 }
 const { sns } = Astro.props
 ---
 
 <li>
-  <a href={snsLinkMap[sns]}
-    ><img
-      src={`src/icons/logos/${sns}.png`}
+  <a href={snsMap[sns].link}
+    ><Image
+      src={snsMap[sns].icon}
       width="20"
       height="20"
       alt={`go to ${sns}`}

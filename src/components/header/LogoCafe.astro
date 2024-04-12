@@ -1,10 +1,11 @@
 ---
-
+import logo from '@/icons/logos/logo.png'
+import { Image } from 'astro:assets'
 ---
 
 <a href="/cafe" class="logo-link">
   <div class="logo-base round bg-cream">
-    <img src="src/icons/logos/logo.png" height="40" alt="" />
+    <Image src={logo} height="40" alt="" />
   </div>
   <h1 class="logo-rabel">
     <span class="-small">cafe</span><span class="-large">椎ノ樹</span>
