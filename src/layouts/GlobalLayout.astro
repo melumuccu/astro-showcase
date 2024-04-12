@@ -51,6 +51,11 @@ const { title, description, siteURL, ogImage, siteOGImage } =
       href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap"
       rel="stylesheet"
     />
+    <!-- Google Fonts: New Tegomin -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap"
+      rel="stylesheet"
+    />
     <slot name="head" />
   </head>
   <body>
@@ -273,9 +278,20 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     outline: none;
   }
 
-  .zen-antique-soft-regular {
-    font-family: 'Zen Antique Soft', serif;
-    font-style: normal;
-    font-weight: 400;
+  /**
+   * Google Fonts
+   */
+  .fonts {
+    &.zen-antique-soft-regular {
+      font-family: 'Zen Antique Soft', serif;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    &.new-tegomin-regular {
+      font-family: 'New Tegomin', serif;
+      font-style: normal;
+      font-weight: 400;
+    }
   }
 </style>
