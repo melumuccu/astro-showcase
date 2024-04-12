@@ -71,15 +71,12 @@ const { title, description, siteURL, ogImage, siteOGImage } =
 
 <style is:global>
   :root {
-    --gap-quarter: 0.25rem;
-    --gap-half: 0.5rem;
     --gap: 1rem;
-    --gap-double: 2rem;
     --bg: #fff;
     --fg: #c4c4c4;
-    --accents-1: #5c5c5c;
-    --accents-2: #ebebeb;
-    --accents-3: #666;
+    --accents-1: var(--color--cafe-au-lait--faux-camaieu-1);
+    --accents-2: var(--color--cafe-au-lait--faux-camaieu-2);
+    --accents-3: var(--color--cafe-au-lait--faux-camaieu-3);
     --geist-foreground: #000;
     --geist-success: #690;
     --radius: 4px;
@@ -88,6 +85,13 @@ const { title, description, siteURL, ogImage, siteOGImage } =
       'Helvetica Neue', sans-serif;
     --font-mono: sfmono-regular, menlo, consolas, 'PT Mono', 'Liberation Mono',
       courier, monospace;
+    --z-index-1: 1;
+    --z-index-10: 10;
+    --z-index-100: 100;
+    --z-index-1000: 1000;
+
+    /* header(sticky) */
+    --z-index-10000: 10000;
   }
 
   * {
@@ -161,7 +165,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
   }
 
   a {
-    color: var(--accents-1);
+    color: var(--fg);
     text-decoration: none;
   }
 
@@ -170,7 +174,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
   }
 
   mark {
-    padding: var(--gap-quarter);
+    padding: calc(var(--gap) / 4);
     background: rgb(247 212 255 / 80%);
     border-radius: var(--radius);
   }
@@ -205,7 +209,13 @@ const { title, description, siteURL, ogImage, siteOGImage } =
 
   ul,
   ol {
-    padding-inline-start: 1.5rem;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  li {
+    padding: 0;
     margin: 0;
   }
 

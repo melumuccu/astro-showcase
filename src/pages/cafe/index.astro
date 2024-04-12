@@ -1,4 +1,6 @@
 ---
+import VisibleOnScroll from '@/components/animations/VisibleOnScroll.astro'
+import Header from '@/components/header/Header.astro'
 import Layout from './_Layout.astro'
 
 const title = 'HACKsaw@cafe 椎ノ樹'
@@ -7,20 +9,42 @@ const description =
   '【cafe 椎ノ樹】は新鮮な珈琲を1杯ずつ挽きたてでご提供。エスプレッソマシンでの高圧抽出による、手で淹れる珈琲には出せない魅力と共に、ちょっとした手作り軽食をお楽しみください。'
 ---
 
-<Layout title={`${title} ${subtitle}`} description={description} path="/">
+<Layout title={`${title} ${subtitle}`} description={description} path={'/'}>
   <div slot="main">
-    <header>
-      <h1 class="fonts zen-antique-soft-regular">{title}<br />{subtitle}</h1>
+    <Header />
+    <div>
       <p>{description}</p>
-    </header>
+    </div>
+    <!-- TODO SAMPLE -->
+    <section>
+      <h2>aaaaa</h2>
+    </section>
+    <VisibleOnScroll>
+      <section slot="content">
+        <h2>メニュー</h2>
+        <ul>
+          <li>珈琲</li>
+          <li>紅茶</li>
+          <li>軽食</li>
+        </ul>
+      </section>
+    </VisibleOnScroll>
+
+    <VisibleOnScroll>
+      <section slot="content">
+        <h2>アクセス</h2>
+        <p>東京都渋谷区神宮前 1-1-1</p>
+      </section>
+    </VisibleOnScroll>
   </div>
+
   <div slot="aside">aside</div>
 </Layout>
 
 <style>
-  .zen-antique-soft-regular {
-    font-family: 'Zen Antique Soft', serif;
-    font-style: normal;
-    font-weight: 400;
+  section {
+    min-height: 600px;
+    background-color: blue;
+    border-radius: var(8px);
   }
 </style>

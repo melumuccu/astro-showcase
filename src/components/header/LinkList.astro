@@ -1,0 +1,45 @@
+---
+type Props = {
+  outline: string
+  top?: string
+  left?: string
+}
+const { outline, top = '-40px', left = '-20px' } = Astro.props
+---
+
+<div class="link-list">
+  <p>{outline}</p>
+  <ul class="border">
+    <slot />
+  </ul>
+</div>
+
+<style define:vars={{ top, left }}>
+  .link-list {
+    position: relative;
+
+    p {
+      position: absolute;
+      top: var(--top);
+      left: var(--left);
+      font-size: 1.25rem;
+      transform: rotate(-30deg);
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--list-min-height);
+    padding: 0.5rem;
+  }
+
+  .border {
+    /* 左上を20%欠けさせ、少し太さを弄る */
+    clip-path: polygon(30% -2%, 100% 0, 102% 102%, 0 100%, -2% 35%);
+
+    /* ボーダーのような太い影を作る */
+    box-shadow: 0 0 0 10px #fff;
+  }
+</style>
