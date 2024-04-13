@@ -32,12 +32,13 @@ import SnsItem from '@/components/header/SnsItem.astro'
   header {
     --list-min-height: 40px;
 
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: var(--z-index-10000);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     padding: 16px;
     background-color: rgb(var(----color--cafe-au-lait--rgb) 0.8);
   }

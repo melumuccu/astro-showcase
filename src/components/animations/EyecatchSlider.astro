@@ -1,0 +1,68 @@
+---
+type Props = {
+  interval: number
+}
+const { interval = 7000 } = Astro.props
+---
+
+<eyecatch-slider data-interval={interval}>
+  <slot />
+</eyecatch-slider>
+
+<style>
+  /* stylelint-disable selector-pseudo-class-no-unknown */
+  eyecatch-slider {
+    display: block;
+    width: 100svw;
+    height: 100svh;
+  }
+
+  eyecatch-slider > :global(*) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2.5s ease;
+  }
+
+  eyecatch-slider > :global(*.active) {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  class EyecatchSlider extends HTMLElement {
+    constructor() {
+      super()
+      const intarval = Number(this.dataset.interval)
+      let currentImageIndex = 1
+      let targets = this.children
+
+      /**
+       * 画像切替処理
+       */
+      const switchImage = () => {
+        const previousImageIndex =
+          (targets.length + currentImageIndex - 1) % targets.length
+
+        const previousImage = targets[previousImageIndex]
+        previousImage.classList.remove('active')
+
+        const currentImage = targets[currentImageIndex]
+        currentImage.classList.add('active')
+
+        currentImageIndex = (currentImageIndex + 1) % targets.length
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        targets[0].classList.add('active') // 初期画像を表示
+        setInterval(switchImage, intarval) // n秒ごとに画像を切り替える
+      })
+    }
+  }
+  customElements.define('eyecatch-slider', EyecatchSlider)
+</script>
