@@ -1,6 +1,10 @@
 ---
+import EyecatchSlider from '@/components/animations/EyecatchSlider.astro'
 import VisibleOnScroll from '@/components/animations/VisibleOnScroll.astro'
 import Header from '@/components/header/Header.astro'
+import EyecatchImage from '@/images/samples/sample-eyecatch.webp'
+import EyecatchImage2 from '@/images/samples/sample-eyecatch2.webp'
+import { Image } from 'astro:assets'
 import Layout from './_Layout.astro'
 
 const title = 'HACKsaw@cafe 椎ノ樹'
@@ -12,13 +16,20 @@ const description =
 <Layout title={`${title} ${subtitle}`} description={description} path={'/'}>
   <div slot="main">
     <Header />
-    <div>
-      <p>{description}</p>
-    </div>
-    <!-- TODO SAMPLE -->
-    <section>
-      <h2>aaaaa</h2>
-    </section>
+
+    <EyecatchSlider interval={7000}>
+      <Image
+        src={EyecatchImage}
+        class="eyecatch-image"
+        alt="a cappuccino image"
+      />
+      <Image
+        src={EyecatchImage2}
+        class="eyecatch-image"
+        alt="a cappuccino image"
+      />
+    </EyecatchSlider>
+
     <VisibleOnScroll>
       <section slot="content">
         <h2>メニュー</h2>
