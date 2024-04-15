@@ -1,21 +1,19 @@
 ---
-import iconGithub from '@/icons/logos/github.png'
-import iconInstagram from '@/icons/logos/instagram.png'
-import iconX from '@/icons/logos/x.png'
+import { LogoGithub, LogoInstagram, LogoX } from '@/assets'
 import { Image } from 'astro:assets'
 
 const snsMap = {
   x: {
     link: 'https://twitter.com/sawa20221022',
-    icon: iconX,
+    icon: LogoX,
   },
   instagram: {
     link: '',
-    icon: iconInstagram,
+    icon: LogoInstagram,
   },
   github: {
     link: 'https://github.com/melumuccu',
-    icon: iconGithub,
+    icon: LogoGithub,
   },
 }
 type Props = {

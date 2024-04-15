@@ -1,5 +1,5 @@
 ---
-import { Close } from '@/icons/index.astro'
+import { Icon } from 'astro-icon/components'
 
 const { modalId } = Astro.props
 
@@ -14,7 +14,7 @@ if (!modalId) {
     <slot />
   </div>
   <button class="close-dialog-button" aria-label="モーダルダイアログを閉じる">
-    <Close />
+    <Icon name="material-symbols:close-rounded" />
   </button>
 </dialog>
 
