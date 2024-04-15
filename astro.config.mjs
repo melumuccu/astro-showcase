@@ -1,3 +1,4 @@
+import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import CoverImageDownloader from './src/integrations/cover-image-downloader';
 import CustomIconDownloader from './src/integrations/custom-icon-downloader';
@@ -40,6 +41,7 @@ export default defineConfig({
     CustomIconDownloader(),
     FeaturedImageDownloader(),
     PublicNotionCopier(),
+    icon(),
   ],
   redirects: {
     '/': '/posts',

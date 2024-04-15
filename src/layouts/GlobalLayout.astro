@@ -73,7 +73,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
   :root {
     --gap: 1rem;
     --bg: #fff;
-    --fg: #c4c4c4;
+    --fg: #fffddd;
     --accents-1: var(--color--cafe-au-lait--faux-camaieu-1);
     --accents-2: var(--color--cafe-au-lait--faux-camaieu-2);
     --accents-3: var(--color--cafe-au-lait--faux-camaieu-3);
@@ -164,6 +164,14 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     color: #999;
   }
 
+  div {
+    color: var(--fg);
+  }
+
+  p {
+    margin: 0;
+  }
+
   a {
     color: var(--fg);
     text-decoration: none;
@@ -190,6 +198,10 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     h1 {
       font-size: 1.6rem;
     }
+  }
+
+  h2 {
+    margin: 0;
   }
 
   ol {
