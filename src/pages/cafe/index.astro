@@ -2,10 +2,12 @@
 import EyecatchSlider from '@/components/animations/EyecatchSlider.astro'
 import VisibleOnScroll from '@/components/animations/VisibleOnScroll.astro'
 import Header from '@/components/header/Header.astro'
-// TODO imageのimportをまとめる
-import CoffeeImage from '@/images/samples/sample-coffee-black.webp'
-import EyecatchImage from '@/images/samples/sample-eyecatch.webp'
-import EyecatchImage2 from '@/images/samples/sample-eyecatch2.webp'
+import {
+  SampleCappuccinoWide,
+  SampleCoffeeBlack,
+  SampleEyecatch,
+  SampleEyecatch2,
+} from '@/images'
 import { Image } from 'astro:assets'
 import Layout from './_Layout.astro'
 
@@ -21,12 +23,17 @@ const description =
 
     <EyecatchSlider interval={7000}>
       <Image
-        src={EyecatchImage}
+        src={SampleCappuccinoWide}
         class="eyecatch-image"
         alt="a cappuccino image"
       />
       <Image
-        src={EyecatchImage2}
+        src={SampleEyecatch}
+        class="eyecatch-image"
+        alt="a cappuccino image"
+      />
+      <Image
+        src={SampleEyecatch2}
         class="eyecatch-image"
         alt="a cappuccino image"
       />
@@ -40,7 +47,7 @@ const description =
             Array.from({ length: 5 }).map((_, index) => (
               <li>
                 <Image
-                  src={CoffeeImage}
+                  src={SampleCoffeeBlack}
                   alt="coffee"
                   width="100"
                   height="100"

@@ -4,6 +4,7 @@
   "version": "0.6.3",
   "private": true,
   "scripts": {
+    "gen-images": "scripts/gen-image-export.sh",
     "dev": "astro dev --open",
     "start": "astro dev --open",
     "build": "astro build",
