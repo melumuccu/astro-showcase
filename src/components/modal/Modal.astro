@@ -28,6 +28,10 @@ if (!modalId) {
     border-radius: 6px;
   }
 
+  dialog > *:has(.no-overflow) {
+    overflow: hidden;
+  }
+
   @media (width <= 640px) {
     dialog {
       width: 100%;
