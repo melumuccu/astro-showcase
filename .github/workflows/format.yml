@@ -1,25 +1,27 @@
-name: Format
+# MEMO .prettierrc の各種プラグインを読み込めてないのでエラーが出てる。無理してworkflowでやる必要はないのでコメントアウト
 
-on:
-  push:
-    branches:
+# name: Format
 
-jobs:
-  format:
-    name: Prettier
-    runs-on: ubuntu-latest
+# on:
+#   push:
+#     branches:
 
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
+# jobs:
+#   format:
+#     name: Prettier
+#     runs-on: ubuntu-latest
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
+#     steps:
+#       - name: Check out Git repository
+#         uses: actions/checkout@v4
 
-      - name: Run format
-        run: npm run format
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 18.x
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Format by GitHub Actions
+#       - name: Run format
+#         run: npm run format
+
+#       - uses: stefanzweifel/git-auto-commit-action@v5
+#         with:
+#           commit_message: Format by GitHub Actions
