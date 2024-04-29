@@ -1,24 +1,26 @@
-name: Lint
+# MEMO 一人での開発でlintは無理してやらなくて良いと判断してコメントアウト
 
-on:
-  push:
-    branches:
+# name: Lint
 
-permissions:
-  checks: write
-  contents: write
+# on:
+#   push:
+#     branches:
 
-jobs:
-  lint:
-    name: ESLint
-    runs-on: ubuntu-latest
+# permissions:
+#   checks: write
+#   contents: write
 
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
+# jobs:
+#   lint:
+#     name: ESLint
+#     runs-on: ubuntu-latest
 
-      - name: Install packages
-        run: npm install
+#     steps:
+#       - name: Check out Git repository
+#         uses: actions/checkout@v4
 
-      - name: Run lint
-        run: npm run lint
+#       - name: Install packages
+#         run: npm install
+
+#       - name: Run lint
+#         run: npm run lint
