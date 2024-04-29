@@ -28,6 +28,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={siteURL} />
+    <link rel="icon" href={getStaticFilePath('/favicon.png')} />
     <meta property="og:url" content={siteURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
