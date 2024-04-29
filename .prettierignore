@@ -1,3 +1,5 @@
 dist/**/*
 tmp/**/*
 public/scripts/fslightbox.js
+src/assets/index.ts
+pnpm-lock.yaml
