@@ -43,7 +43,4 @@ export default defineConfig({
     PublicNotionCopier(),
     icon(),
   ],
-  redirects: {
-    '/': '/posts',
-  },
 });
