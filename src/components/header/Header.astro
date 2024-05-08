@@ -10,15 +10,16 @@ import SnsItem from '@/components/header/SnsItem.astro'
 
   <section class="links">
     <LinkList outline="Cafe">
-      <LinkItem link="/cafe" label="Home" />
+      <LinkItem link="/" label="Home" />
     </LinkList>
     <LinkList outline="Posts">
-      <LinkItem link="/posts/cafe-info" label="info" />
+      <LinkItem link="/posts" label="ALL" />
+      <LinkItem link="/posts/blog" label="blog" />
+      <!-- <LinkItem link="/posts/cafe-info" label="info" /> -->
     </LinkList>
     <LinkList outline="SNS" top="-15px">
       <SnsItem sns="x" />
       <SnsItem sns="instagram" />
-      <SnsItem sns="github" />
     </LinkList>
   </section>
 </header>
