@@ -44,13 +44,16 @@ const textures = [
   TextureCoffeeStain99,
   TextureCoffeeStain100,
 ]
-const texture = textures[Math.floor(Math.random() * textures.length)]
 ---
 
-<div class="sectionTitle">
-  <Image src={texture} class="texture" alt="coffee stain texture" />
+<section-title class="sectionTitle">
+  {
+    textures.map((texture) => (
+      <Image src={texture} class="texture" alt="coffee stain texture" />
+    ))
+  }
   <h2 class="fonts zen-antique-soft-regular">{title}</h2>
-</div>
+</section-title>
 
 <style>
   h2 {
@@ -58,16 +61,39 @@ const texture = textures[Math.floor(Math.random() * textures.length)]
     font-size: 2.5rem;
   }
 
-  .sectionTitle {
+  section-title {
     position: relative;
 
     .texture {
       position: absolute;
       top: -100%;
       z-index: var(--z-index-minus-1);
+      display: none;
       width: 180px;
       height: auto;
       object-fit: contain;
     }
   }
 </style>
+
+<script>
+  class SectionTitle extends HTMLElement {
+    constructor() {
+      super()
+
+      // テクスチャ画像をランダムに表示する
+      const showTexture = () => {
+        const textures = this.querySelectorAll(
+          '.texture'
+        ) as NodeListOf<HTMLImageElement>
+        const texture = textures[Math.floor(Math.random() * textures.length)]
+        texture.style.display = 'block'
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        showTexture()
+      })
+    }
+  }
+  customElements.define('section-title', SectionTitle)
+</script>
