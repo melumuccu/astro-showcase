@@ -5,6 +5,7 @@ import {
   SampleEyecatch,
   SampleEyecatch2,
 } from '@/assets'
+import SectionTitle from '@/components/SectionTitle.astro'
 import EyecatchSlider from '@/components/animations/EyecatchSlider.astro'
 import VisibleOnScroll from '@/components/animations/VisibleOnScroll.astro'
 import Header from '@/components/header/Header.astro'
@@ -41,7 +42,7 @@ const description =
 
     <VisibleOnScroll>
       <section slot="content">
-        <h2 class="fonts zen-antique-soft-regular">メニュー</h2>
+        <SectionTitle title="メニュー" />
         <ul>
           {
             Array.from({ length: 5 }).map((_, index) => (
@@ -67,22 +68,26 @@ const description =
 
     <VisibleOnScroll>
       <section slot="content">
-        <h2>アクセス</h2>
+        <SectionTitle title="アクセス" />
         <p>東京都渋谷区神宮前 1-1-1</p>
       </section>
     </VisibleOnScroll>
-    <div class="test">aaaa</div>
   </div>
 </Layout>
+
+<style is:global>
+  .main-contents > .visibleOnScroll > section {
+    padding-top: 5rem;
+  }
+
+  .main-contents > .visibleOnScroll:nth-of-type(even) > section {
+    background-color: rgb(0 0 0 / 20%);
+  }
+</style>
 
 <style>
   .main-contents {
     display: grid;
-    gap: 5rem;
-  }
-
-  h2 {
-    font-size: 2.5rem;
   }
 
   section {

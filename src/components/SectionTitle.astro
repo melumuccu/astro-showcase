@@ -1,0 +1,73 @@
+---
+import {
+  TextureCoffeeStain02,
+  TextureCoffeeStain06,
+  TextureCoffeeStain09,
+  TextureCoffeeStain100,
+  TextureCoffeeStain11,
+  TextureCoffeeStain13,
+  TextureCoffeeStain19,
+  TextureCoffeeStain37,
+  TextureCoffeeStain38,
+  TextureCoffeeStain44,
+  TextureCoffeeStain46,
+  TextureCoffeeStain47,
+  TextureCoffeeStain84,
+  TextureCoffeeStain85,
+  TextureCoffeeStain97,
+  TextureCoffeeStain99,
+} from '@/assets'
+
+import { Image } from 'astro:assets'
+
+type Props = {
+  title: string
+}
+const { title } = Astro.props
+
+// テクスチャ画像をランダムに選択する
+const textures = [
+  TextureCoffeeStain02,
+  TextureCoffeeStain06,
+  TextureCoffeeStain09,
+  TextureCoffeeStain11,
+  TextureCoffeeStain13,
+  TextureCoffeeStain19,
+  TextureCoffeeStain37,
+  TextureCoffeeStain38,
+  TextureCoffeeStain44,
+  TextureCoffeeStain46,
+  TextureCoffeeStain47,
+  TextureCoffeeStain84,
+  TextureCoffeeStain85,
+  TextureCoffeeStain97,
+  TextureCoffeeStain99,
+  TextureCoffeeStain100,
+]
+const texture = textures[Math.floor(Math.random() * textures.length)]
+---
+
+<div class="sectionTitle">
+  <Image src={texture} class="texture" alt="coffee stain texture" />
+  <h2 class="fonts zen-antique-soft-regular">{title}</h2>
+</div>
+
+<style>
+  h2 {
+    position: relative; /* テクスチャ画像の上に当テキストを表示するため必須 */
+    font-size: 2.5rem;
+  }
+
+  .sectionTitle {
+    position: relative;
+
+    .texture {
+      position: absolute;
+      top: -100%;
+      z-index: var(--z-index-minus-1);
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+</style>
