@@ -33,8 +33,6 @@ import SnsItem from '@/components/header/SnsItem.astro'
 
   <style>
     header {
-      --list-min-height: 40px;
-
       position: fixed;
       top: 0;
       z-index: var(--z-index-10000);
@@ -47,6 +45,8 @@ import SnsItem from '@/components/header/SnsItem.astro'
     }
 
     .links {
+      --list-min-height: 40px;
+
       display: flex;
       gap: 1.5rem;
       align-items: center;
