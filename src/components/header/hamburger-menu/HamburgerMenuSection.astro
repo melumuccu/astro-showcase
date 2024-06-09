@@ -1,0 +1,18 @@
+---
+const { label } = Astro.props
+---
+
+<li>
+  <section>
+    <h2>{label}</h2>
+    <ul>
+      <slot />
+    </ul>
+  </section>
+</li>
+
+<style>
+  ul {
+    list-style-type: none;
+  }
+</style>

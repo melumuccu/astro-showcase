@@ -5,13 +5,16 @@ import LinkItem from '@/components/header/LinkItem.astro'
 import LinkList from '@/components/header/LinkList.astro'
 import LogoCafe from '@/components/header/LogoCafe.astro'
 import SnsItem from '@/components/header/SnsItem.astro'
+import HambergerMenuItem from '@/components/header/hamburger-menu/HamburgerMenuItem.astro'
+import HambergerMenuList from '@/components/header/hamburger-menu/HamburgerMenuList.astro'
+import HambergerMenuSection from '@/components/header/hamburger-menu/HamburgerMenuSection.astro'
 ---
 
 <header class="fonts new-tegomin-regular">
   <LogoCafe />
 
   <ShowPc>
-    <section class="links">
+    <nav class="links" aria-label="links">
       <LinkList outline="Cafe">
         <LinkItem link="/" label="Home" />
       </LinkList>
@@ -24,11 +27,17 @@ import SnsItem from '@/components/header/SnsItem.astro'
         <SnsItem sns="x" />
         <SnsItem sns="instagram" />
       </LinkList>
-    </section>
+    </nav>
   </ShowPc>
 
   <ShowMb>
-    <section class="hamburger-menu show-sp">test</section>
+    <nav class="hamburger-menu show-sp" aria-label="hamburger-menu">
+      <HambergerMenuList>
+        <HambergerMenuSection title="Cafe">
+          <HambergerMenuItem link="/" label="Home" />
+        </HambergerMenuSection>
+      </HambergerMenuList>
+    </nav>
   </ShowMb>
 
   <style>
@@ -41,7 +50,7 @@ import SnsItem from '@/components/header/SnsItem.astro'
       justify-content: space-between;
       width: 100%;
       padding: 16px;
-      background-color: rgb(var(----color--cafe-au-lait--rgb) 0.8);
+      background-color: rgb(var(--color--cafe-au-lait--rgb) 0.8);
     }
 
     .links {
@@ -56,6 +65,12 @@ import SnsItem from '@/components/header/SnsItem.astro'
     hr {
       height: 1.5rem;
       border-right: 1px solid var(--fg);
+    }
+
+    @media (width <= 640px) {
+      header {
+        padding: 0 16px 16px;
+      }
     }
   </style>
 </header>

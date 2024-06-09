@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<hamburger-menu-list>
+  <nav aria-label="hamburger-menu">
+    <button aria-label="menu-toggle-button">
+      <Icon name="material-symbols:menu-rounded" width={24} height={24} />
+    </button>
+    <ul aria-label="menu">
+      <slot />
+    </ul>
+  </nav>
+</hamburger-menu-list>
+
+<style>
+  nav {
+    display: contents;
+  }
+
+  button {
+    position: relative; /* z-index を効かせるために必要 */
+    z-index: var(--z-index-10);
+  }
+
+  ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: var(--z-index-1);
+    width: 85dvw;
+    height: 100dvh;
+    list-style-type: none;
+    background-color: rgb(var(--color--cafe-au-lait--rgb) / 80%);
+    transition: transform 0.5s ease-in-out; /* スライドインアニメーション */
+    transform: translateX(100dvw); /* メニューを画面外の右側に配置 */
+  }
+
+  ul.is-active {
+    transform: translateX(0); /* メニューを画面内にスライドイン */
+  }
+</style>
+
+<script>
+  class HamburgerMenuList extends HTMLElement {
+    constructor() {
+      super()
+
+      /**
+       * メニューの表示/非表示を切り替える
+       */
+      const toggleMenu = () => {
+        const menu = this.querySelector('*[aria-label="menu"]')
+        menu.classList.toggle('is-active')
+      }
+
+      // ハンバーガーアイコンにクリックイベントを追加
+      this.querySelector('*[aria-label="menu-toggle-button"]').addEventListener(
+        'click',
+        toggleMenu
+      )
+    }
+  }
+  customElements.define('hamburger-menu-list', HamburgerMenuList)
+</script>
