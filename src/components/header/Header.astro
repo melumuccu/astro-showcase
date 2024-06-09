@@ -1,4 +1,6 @@
 ---
+import ShowMb from '@/components/ShowMb.astro'
+import ShowPc from '@/components/ShowPc.astro'
 import LinkItem from '@/components/header/LinkItem.astro'
 import LinkList from '@/components/header/LinkList.astro'
 import LogoCafe from '@/components/header/LogoCafe.astro'
@@ -8,46 +10,52 @@ import SnsItem from '@/components/header/SnsItem.astro'
 <header class="fonts new-tegomin-regular">
   <LogoCafe />
 
-  <section class="links">
-    <LinkList outline="Cafe">
-      <LinkItem link="/" label="Home" />
-    </LinkList>
-    <LinkList outline="Posts">
-      <LinkItem link="/posts" label="ALL" />
-      <LinkItem link="/posts/blog" label="blog" />
-      <!-- <LinkItem link="/posts/cafe-info" label="info" /> -->
-    </LinkList>
-    <LinkList outline="SNS" top="-15px">
-      <SnsItem sns="x" />
-      <SnsItem sns="instagram" />
-    </LinkList>
-  </section>
+  <ShowPc>
+    <section class="links">
+      <LinkList outline="Cafe">
+        <LinkItem link="/" label="Home" />
+      </LinkList>
+      <LinkList outline="Posts">
+        <LinkItem link="/posts" label="ALL" />
+        <LinkItem link="/posts/blog" label="blog" />
+        <!-- <LinkItem link="/posts/cafe-info" label="info" /> -->
+      </LinkList>
+      <LinkList outline="SNS" top="-15px">
+        <SnsItem sns="x" />
+        <SnsItem sns="instagram" />
+      </LinkList>
+    </section>
+  </ShowPc>
+
+  <ShowMb>
+    <section class="hamburger-menu show-sp">test</section>
+  </ShowMb>
+
+  <style>
+    header {
+      --list-min-height: 40px;
+
+      position: fixed;
+      top: 0;
+      z-index: var(--z-index-10000);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 16px;
+      background-color: rgb(var(----color--cafe-au-lait--rgb) 0.8);
+    }
+
+    .links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    hr {
+      height: 1.5rem;
+      border-right: 1px solid var(--fg);
+    }
+  </style>
 </header>
-
-<style>
-  header {
-    --list-min-height: 40px;
-
-    position: fixed;
-    top: 0;
-    z-index: var(--z-index-10000);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 16px;
-    background-color: rgb(var(----color--cafe-au-lait--rgb) 0.8);
-  }
-
-  .links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  hr {
-    height: 1.5rem;
-    border-right: 1px solid var(--fg);
-  }
-</style>
