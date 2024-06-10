@@ -24,6 +24,12 @@ import { Icon } from 'astro-icon/components'
   </nav>
 </hamburger-menu-list>
 
+<style is:global>
+  body:has(.menu.is-active) {
+    overflow: hidden; /* メニューが開いているときにスクロールを禁止 */
+  }
+</style>
+
 <style>
   nav {
     display: contents;
@@ -47,8 +53,12 @@ import { Icon } from 'astro-icon/components'
     top: 0;
     right: 0;
     z-index: var(--z-index-1);
-    width: 85dvw;
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: 2rem;
+    width: 100dvw;
     height: 100dvh;
+    padding: 6rem 4rem;
     list-style-type: none;
     background-color: rgb(var(--color--cafe-au-lait--rgb) / 80%);
     transition: transform 0.5s ease-in-out; /* スライドインアニメーション */

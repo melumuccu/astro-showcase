@@ -5,6 +5,7 @@ import LinkItem from '@/components/header/LinkItem.astro'
 import LinkList from '@/components/header/LinkList.astro'
 import LogoCafe from '@/components/header/LogoCafe.astro'
 import SnsItem from '@/components/header/SnsItem.astro'
+import HambergerMenuSnsItem from '@/components/header/hamburger-menu/HambergerMenuSnsItem.astro'
 import HambergerMenuItem from '@/components/header/hamburger-menu/HamburgerMenuItem.astro'
 import HambergerMenuList from '@/components/header/hamburger-menu/HamburgerMenuList.astro'
 import HambergerMenuSection from '@/components/header/hamburger-menu/HamburgerMenuSection.astro'
@@ -34,7 +35,15 @@ import HambergerMenuSection from '@/components/header/hamburger-menu/HamburgerMe
     <nav class="hamburger-menu show-sp" aria-label="hamburger-menu">
       <HambergerMenuList>
         <HambergerMenuSection title="Cafe">
-          <HambergerMenuItem link="/" label="Home" />
+          <HambergerMenuItem url="/" label="Home" />
+        </HambergerMenuSection>
+        <HambergerMenuSection title="Posts">
+          <HambergerMenuItem url="/posts" label="All" />
+          <HambergerMenuItem url="/posts/blog" label="Blog" />
+        </HambergerMenuSection>
+        <HambergerMenuSection title="SNS">
+          <HambergerMenuSnsItem sns="x" />
+          <HambergerMenuSnsItem sns="instagram" />
         </HambergerMenuSection>
       </HambergerMenuList>
     </nav>
