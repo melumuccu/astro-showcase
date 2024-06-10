@@ -1,0 +1,23 @@
+---
+// see: https://console.cloud.google.com/google/maps-apis/build
+export interface Props {
+  apiKey: string
+  place: string
+  loading?: 'eager' | 'lazy'
+}
+
+const { apiKey, place, loading = 'lazy' } = Astro.props
+const mode = 'place'
+const params = { q: place }
+const formatedParams = Object.entries(params)
+  .map(([key, value]) => `${key}=${value}`)
+  .join('&')
+---
+
+<iframe
+  src={`https://www.google.com/maps/embed/v1/${mode}?key=${apiKey}&${formatedParams}`}
+  width="100%"
+  height="100%"
+  style="border: 0;"
+  loading={loading}
+  referrerpolicy="no-referrer-when-downgrade"></iframe>

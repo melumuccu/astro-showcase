@@ -5,10 +5,12 @@ import {
   SampleEyecatch,
   SampleEyecatch2,
 } from '@/assets'
+import GoogleMap from '@/components/GoogleMap.astro'
 import SectionTitle from '@/components/SectionTitle.astro'
 import EyecatchSlider from '@/components/animations/EyecatchSlider.astro'
 import VisibleOnScroll from '@/components/animations/VisibleOnScroll.astro'
 import Header from '@/components/header/Header.astro'
+import { GOOGLE_MAP_API_KEY } from '@/server-constants'
 import { Image } from 'astro:assets'
 import Layout from './_Layout.astro'
 
@@ -69,7 +71,14 @@ const description =
     <VisibleOnScroll>
       <section slot="content">
         <SectionTitle title="アクセス" />
-        <p>東京都渋谷区神宮前 1-1-1</p>
+        <div class="google-map-wrapper">
+          <div class="google-map">
+            <GoogleMap
+              apiKey={GOOGLE_MAP_API_KEY}
+              place="東京都渋谷区神宮前 1-1-1"
+            />
+          </div>
+        </div>
       </section>
     </VisibleOnScroll>
   </div>
@@ -158,6 +167,33 @@ const description =
 
     .price {
       grid-area: 1 / 4 / 2 / 5;
+    }
+  }
+
+  .google-map-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .google-map {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    width: min(1000px, 100%);
+    height: min(700px, 95dvh);
+  }
+
+  @media (width <= 640px) {
+    .google-map {
+      gap: 0.5rem;
+      width: 100%;
+      height: 50dvh;
+      padding: 0;
     }
   }
 </style>
