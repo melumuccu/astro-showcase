@@ -5,7 +5,18 @@ import { Icon } from 'astro-icon/components'
 <hamburger-menu-list>
   <nav aria-label="hamburger-menu">
     <button aria-label="menu-toggle-button">
-      <Icon name="material-symbols:menu-rounded" width={24} height={24} />
+      <Icon
+        name="material-symbols:menu-rounded"
+        data-button-name="hamburger"
+        width={24}
+        height={24}
+      />
+      <Icon
+        name="material-symbols:close-rounded"
+        data-button-name="close"
+        width={24}
+        height={24}
+      />
     </button>
     <ul aria-label="menu" class="menu">
       <slot />
@@ -21,6 +32,14 @@ import { Icon } from 'astro-icon/components'
   button {
     position: relative; /* z-index を効かせるために必要 */
     z-index: var(--z-index-10);
+    padding: 0.1rem;
+    background-color: var(--color--cafe-au-lait--faux-camaieu-1);
+    border: 1px solid var(--color--white);
+    border-radius: var(--radius);
+  }
+
+  svg {
+    color: var(--color--white);
   }
 
   .menu {
@@ -39,6 +58,22 @@ import { Icon } from 'astro-icon/components'
   .menu.is-active {
     transform: translateX(0); /* メニューを画面内にスライドイン */
   }
+
+  nav:has(.menu.is-active) button > [data-button-name='hamburger'] {
+    display: none;
+  }
+
+  nav:has(.menu:not(.is-active)) button > [data-button-name='hamburger'] {
+    display: block;
+  }
+
+  nav:has(.menu.is-active) button > [data-button-name='close'] {
+    display: block;
+  }
+
+  nav:has(.menu:not(.is-active)) button > [data-button-name='close'] {
+    display: none;
+  }
 </style>
 
 <script>
@@ -47,9 +82,7 @@ import { Icon } from 'astro-icon/components'
       super()
 
       const menu = this.querySelector('*[aria-label="menu"]')
-      const hamburgerIcon = this.querySelector(
-        '*[aria-label="menu-toggle-button"]'
-      )
+      const button = this.querySelector('*[aria-label="menu-toggle-button"]')
 
       /**
        * メニューの表示/非表示を切り替える
@@ -59,7 +92,7 @@ import { Icon } from 'astro-icon/components'
       }
 
       // ハンバーガーアイコンにクリックイベントを追加
-      hamburgerIcon.addEventListener('click', toggleMenu)
+      button.addEventListener('click', toggleMenu)
 
       /**
        * タッチスタート時の処理
