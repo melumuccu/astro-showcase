@@ -1,0 +1,141 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<hamburger-menu-list>
+  <nav aria-label="hamburger-menu">
+    <button aria-label="menu-toggle-button">
+      <Icon
+        name="material-symbols:menu-rounded"
+        data-button-name="hamburger"
+        width={24}
+        height={24}
+      />
+      <Icon
+        name="material-symbols:close-rounded"
+        data-button-name="close"
+        width={24}
+        height={24}
+      />
+    </button>
+    <ul aria-label="menu" class="menu">
+      <slot />
+    </ul>
+  </nav>
+</hamburger-menu-list>
+
+<style is:global>
+  body:has(.menu.is-active) {
+    overflow: hidden; /* メニューが開いているときにスクロールを禁止 */
+  }
+</style>
+
+<style>
+  nav {
+    display: contents;
+  }
+
+  button {
+    position: relative; /* z-index を効かせるために必要 */
+    z-index: var(--z-index-10);
+    padding: 0.1rem;
+    background-color: var(--color--cafe-au-lait--faux-camaieu-1);
+    border: 1px solid var(--color--white);
+    border-radius: var(--radius);
+  }
+
+  svg {
+    color: var(--color--white);
+  }
+
+  .menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: var(--z-index-1);
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: 2rem;
+    width: 100dvw;
+    height: 100dvh;
+    padding: 6rem 4rem;
+    list-style-type: none;
+    background-color: rgb(var(--color--cafe-au-lait--rgb) / 80%);
+    transition: transform 0.5s ease-in-out; /* スライドインアニメーション */
+    transform: translateX(100dvw); /* メニューを画面外の右側に配置 */
+  }
+
+  .menu.is-active {
+    transform: translateX(0); /* メニューを画面内にスライドイン */
+  }
+
+  nav:has(.menu.is-active) button > [data-button-name='hamburger'] {
+    display: none;
+  }
+
+  nav:has(.menu:not(.is-active)) button > [data-button-name='hamburger'] {
+    display: block;
+  }
+
+  nav:has(.menu.is-active) button > [data-button-name='close'] {
+    display: block;
+  }
+
+  nav:has(.menu:not(.is-active)) button > [data-button-name='close'] {
+    display: none;
+  }
+</style>
+
+<script>
+  class HamburgerMenuList extends HTMLElement {
+    constructor() {
+      super()
+
+      const menu = this.querySelector('*[aria-label="menu"]')
+      const button = this.querySelector('*[aria-label="menu-toggle-button"]')
+
+      /**
+       * メニューの表示/非表示を切り替える
+       */
+      const toggleMenu = () => {
+        menu.classList.toggle('is-active')
+      }
+
+      // ハンバーガーアイコンにクリックイベントを追加
+      button.addEventListener('click', toggleMenu)
+
+      /**
+       * タッチスタート時の処理
+       * タッチスタート時の座標を記録する
+       */
+      const onTouchStart = (event) => {
+        touchStartX = event.changedTouches[0].clientX
+        isSwiping = false
+      }
+
+      /**
+       * タッチ移動時の処理
+       * タッチ移動後の座標がスタート時の座標よりも指定距離以上右側にあればメニューを閉じる
+       */
+      const onTouchMove = (event) => {
+        const touchMoveX = event.changedTouches[0].clientX
+        const swipeDistanceX = touchMoveX - touchStartX
+
+        // 左から右に一定以上スワイプされた場合
+        if (!isSwiping && swipeDistanceX > 100) {
+          isSwiping = true
+          if (menu.classList.contains('is-active')) {
+            toggleMenu()
+          }
+        }
+      }
+      let touchStartX = 0
+      let isSwiping = false
+
+      // メニューにスワイプ検知を追加
+      menu.addEventListener('touchstart', onTouchStart)
+      menu.addEventListener('touchmove', onTouchMove)
+    }
+  }
+  customElements.define('hamburger-menu-list', HamburgerMenuList)
+</script>

@@ -1,0 +1,43 @@
+---
+const { title } = Astro.props
+---
+
+<li>
+  <section>
+    <p>{title}</p>
+    <ul class="border">
+      <slot />
+    </ul>
+  </section>
+</li>
+
+<style>
+  section {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: center;
+    width: 100%;
+
+    p {
+      display: inline-block;
+      font-size: 1.75rem;
+    }
+  }
+
+  ul {
+    display: grid;
+    grid-auto-rows: min-content;
+    list-style-type: none;
+  }
+
+  .border {
+    width: 100%;
+
+    /* 左上を欠けさせ、少し線の太さを弄る */
+    clip-path: polygon(10% -4%, 101% -2%, 100% 105%, 0% 102%, -1% 2%);
+
+    /* ボーダーのような太い影を作る */
+    box-shadow: 0 0 0 10px #fff;
+  }
+</style>

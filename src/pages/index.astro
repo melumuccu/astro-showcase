@@ -80,6 +80,12 @@ const description =
     padding-top: 5rem;
   }
 
+  @media (width <= 640px) {
+    .main-contents > .visibleOnScroll > section {
+      padding: 5rem 0.5rem 3rem;
+    }
+  }
+
   .main-contents > .visibleOnScroll:nth-of-type(even) > section {
     background-color: rgb(0 0 0 / 20%);
   }
