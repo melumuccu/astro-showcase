@@ -1,0 +1,19 @@
+---
+import Layout from '@/layouts/_LayoutToShowCase.astro'
+import { kebabToPascal } from '@/lib/text'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <main slot="main">
+    <nav class="nav-home">←<a href="/">HOME</a></nav>
+    <h1>
+      {kebabToPascal(Astro.url.pathname.split('/').pop())}
+    </h1>
+  </main>
+</Layout>
+
+<style>
+  .nav-home {
+    font-size: 1.4rem;
+  }
+</style>

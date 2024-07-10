@@ -1,0 +1,16 @@
+---
+import { Image1, Image2, Image3 } from '@/assets'
+import EyecatchSlider from '@/components/animations/EyecatchSlider.astro'
+import Layout from '@/layouts/_LayoutToShowCase.astro'
+import { Image } from 'astro:assets'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <EyecatchSlider slot="main" interval={3000}>
+    <Image src={Image1} class="image" alt="image 1" />
+    <Image src={Image2} class="image" alt="image 2" />
+    <Image src={Image3} class="image" alt="image 3" />
+  </EyecatchSlider>
+</Layout>
+
+<style></style>
