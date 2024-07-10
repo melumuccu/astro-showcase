@@ -1,9 +1,5 @@
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
-import CoverImageDownloader from './src/integrations/cover-image-downloader';
-import CustomIconDownloader from './src/integrations/custom-icon-downloader';
-import FeaturedImageDownloader from './src/integrations/featured-image-downloader';
-import PublicNotionCopier from './src/integrations/public-notion-copier';
 import { BASE_PATH, CUSTOM_DOMAIN } from './src/server-constants';
 
 const getSite = function () {
@@ -36,11 +32,5 @@ const getSite = function () {
 export default defineConfig({
   site: getSite(),
   base: BASE_PATH,
-  integrations: [
-    CoverImageDownloader(),
-    CustomIconDownloader(),
-    FeaturedImageDownloader(),
-    PublicNotionCopier(),
-    icon(),
-  ],
+  integrations: [icon()],
 });

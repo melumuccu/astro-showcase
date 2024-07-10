@@ -2,9 +2,7 @@
 import { SITE_NAME } from '@/meta-settings'
 
 import GoogleAnalytics from '@/components/GoogleAnalytics.astro'
-import { getStaticFilePath } from '@/lib/blog-helpers.ts'
-import { ENABLE_LIGHTBOX, PUBLIC_GA_TRACKING_ID } from '@/server-constants'
-import '@/styles/color.css'
+import { PUBLIC_GA_TRACKING_ID } from '@/server-constants'
 
 export interface Props {
   title: string
@@ -28,7 +26,6 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={siteURL} />
-    <link rel="icon" href={getStaticFilePath('/favicon.png')} />
     <meta property="og:url" content={siteURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -62,11 +59,6 @@ const { title, description, siteURL, ogImage, siteOGImage } =
   <body>
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <slot name="body" />
-    {
-      ENABLE_LIGHTBOX && (
-        <script src={getStaticFilePath('/scripts/fslightbox.js')} />
-      )
-    }
   </body>
 </html>
 

@@ -1,7 +1,6 @@
 ---
 import GlobalLayout from '@/layouts/GlobalLayout.astro'
 import PoweredBy from '../components/PoweredBy.astro'
-import { getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
 
 export interface Props {
   title: string
@@ -11,21 +10,13 @@ export interface Props {
 }
 
 const { title, description, path, ogImage } = Astro.props as Props
-
-const siteURL = new URL(getNavLink(path), Astro.site).toString()
-// TODO 画像差し替え
-const siteOGImage = new URL(
-  getStaticFilePath('/default-og-image.png'),
-  Astro.site
-)
 ---
 
 <GlobalLayout
   title={title}
   description={description}
-  siteURL={siteURL}
+  siteURL={''}
   ogImage={ogImage}
-  siteOGImage={siteOGImage}
 >
   <main slot="body">
     <slot name="main" />
