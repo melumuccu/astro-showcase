@@ -1,0 +1,31 @@
+---
+import { Image1, Image2, Image3 } from '@/assets'
+import MenuItem from '@/components/card/menu/MenuItem.astro'
+import MenuList from '@/components/card/menu/MenuList.astro'
+import Layout from '@/layouts/_LayoutToShowCase.astro'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <MenuList slot="main">
+    <MenuItem
+      image={Image1}
+      label="醤油ラーメン"
+      discription="ラーメンの説明"
+      price={1000}
+    />
+    <MenuItem
+      image={Image2}
+      label="味噌ラーメン"
+      discription="ラーメンの説明"
+      price={1000}
+    />
+    <MenuItem
+      image={Image3}
+      label="塩ラーメン"
+      discription="ラーメンの説明"
+      price={1000}
+    />
+  </MenuList>
+</Layout>
+
+<style></style>

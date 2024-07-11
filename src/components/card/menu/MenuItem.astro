@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets'
+
+type MenuItemProps = {
+  image: ImageMetadata
+  label: string
+  discription: string
+  price: number
+}
+
+const { image, label, discription, price } = Astro.props as MenuItemProps
+---
+
+<li>
+  <Image src={image} alt="coffee" width="100" height="100" />
+  <p class="menu">{label}</p>
+  <span class="divider"></span>
+  <p class="discription">
+    {discription}
+  </p>
+  <p class="price">¥{price}</p>
+</li>
+
+<style>
+  li {
+    display: grid;
+    grid-template: 1fr 2fr / auto auto 1fr auto;
+    gap: 0.25rem 1rem;
+    align-items: center;
+
+    img {
+      grid-area: 1 / 1 / 3 / 2;
+      border-radius: 50%;
+    }
+
+    .menu {
+      grid-area: 1 / 2 / 2 / 3;
+      font-size: 1.5rem;
+    }
+
+    .divider {
+      grid-area: 1 / 3 / 2 / 4;
+      min-width: 12px;
+      border-bottom: 1px dotted #000;
+    }
+
+    .discription {
+      grid-area: 2 / 2 / 3 / 5;
+      align-self: start;
+    }
+
+    .price {
+      grid-area: 1 / 4 / 2 / 5;
+    }
+  }
+</style>
