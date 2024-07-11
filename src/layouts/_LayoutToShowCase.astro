@@ -9,13 +9,15 @@ export interface Props {
 }
 
 const { title, description, path } = Astro.props
+
+const pageName = Astro.url.pathname.split('/').pop() || Astro.url.pathname
 ---
 
 <GlobalLayout title={title} description={description} siteURL={path}>
   <main slot="body">
     <nav class="nav-home">←<a href="/">HOME</a></nav>
     <h1>
-      {kebabToPascal(Astro.url.pathname.split('/').pop())}
+      {kebabToPascal(pageName)}
     </h1>
     <div class="container">
       <slot name="main" />
@@ -28,7 +30,6 @@ const { title, description, path } = Astro.props
     max-width: 100vw;
     min-height: 100vh;
     background-color: rgb(#000 / 15%);
-    background-image: url('/assets/texture/black-paper_38.jpg');
     background-size: cover;
   }
 
@@ -38,12 +39,12 @@ const { title, description, path } = Astro.props
 
   .container {
     display: grid;
-    justify-content: center;
     align-items: center;
-    border: 1px solid #000;
-    height: 90dvh;
+    justify-content: center;
     width: 90dvw;
+    height: 90dvh;
     margin: 0 auto;
     overflow: auto;
+    border: 1px solid #000;
   }
 </style>
