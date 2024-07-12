@@ -1,5 +1,7 @@
 ---
+import NavMenu from '@/components/NavMenu.astro'
 import GlobalLayout from '@/layouts/GlobalLayout.astro'
+import { kebabToPascal } from '@/lib/text'
 
 export interface Props {
   title: string
@@ -9,30 +11,51 @@ export interface Props {
 }
 
 const { title, description, path, ogImage } = Astro.props as Props
+const pageName = Astro.url.pathname.split('/').pop() || Astro.url.pathname
 ---
 
 <GlobalLayout
   title={title}
   description={description}
-  siteURL={''}
+  siteURL={path}
   ogImage={ogImage}
 >
-  <main slot="body">
-    <slot />
-  </main>
+  <div slot="body" class="body">
+    <NavMenu />
+    <main>
+      <h1>
+        {kebabToPascal(pageName)}
+      </h1>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+  </div>
 </GlobalLayout>
 
 <style>
-  main {
+  .body {
+    display: grid;
+    grid-template-columns: max-content 1fr;
     max-width: 100vw;
     min-height: 100vh;
+    padding: 2rem;
     background-color: rgb(#000 / 15%);
-    background-image: url('/assets/texture/black-paper_38.jpg');
-    background-size: cover;
   }
 
-  footer {
-    font-size: 0.75rem;
-    text-align: center;
+  main {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+  }
+
+  .container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: auto;
+    border: 1px solid #000;
   }
 </style>
