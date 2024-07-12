@@ -1,0 +1,30 @@
+---
+import WhenVisibleComponent from '@/components/util/WhenVisible.astro'
+import Layout from '@/layouts/_LayoutToShowCase.astro'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <WhenVisibleComponent desktop>
+    <div class="desktop">media query: Desktop</div>
+  </WhenVisibleComponent>
+  <WhenVisibleComponent tablet>
+    <div class="tablet">media query: Tablet</div>
+  </WhenVisibleComponent>
+  <WhenVisibleComponent mobile>
+    <div class="mobile">media query: Mobile</div>
+  </WhenVisibleComponent>
+</Layout>
+
+<style>
+  .desktop {
+    color: #f00;
+  }
+
+  .tablet {
+    color: #0f0;
+  }
+
+  .mobile {
+    color: #00f;
+  }
+</style>

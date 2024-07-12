@@ -1,0 +1,47 @@
+---
+// see: [メディアクエリに依存した要素の表示切り替えを `display: contents` でユーティリティコンポーネント化](https://www.notion.so/hacksaw/display-contents-a8daff2fc72f4398a99dabf0131c7b23)
+interface Props {
+  mobile?: boolean
+  tablet?: boolean
+  desktop?: boolean
+}
+
+const { mobile = false, tablet = false, desktop = false } = Astro.props
+
+const classNames = [
+  'container',
+  mobile ? 'mobile' : '',
+  tablet ? 'tablet' : '',
+  desktop ? 'desktop' : '',
+]
+  .filter(Boolean)
+  .join(' ')
+---
+
+<div class={classNames}>
+  <slot />
+</div>
+
+<style>
+  .container {
+    display: none;
+  }
+
+  @container style(--is-mq-desktop) {
+    .desktop {
+      display: contents;
+    }
+  }
+
+  @container style(--is-mq-tablet) {
+    .tablet {
+      display: contents;
+    }
+  }
+
+  @container style(--is-mq-mobile) {
+    .mobile {
+      display: contents;
+    }
+  }
+</style>
