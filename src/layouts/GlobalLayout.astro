@@ -60,6 +60,22 @@ const { title, description, siteURL, ogImage, siteOGImage } =
 
 <style is:global>
   :root {
+    /*
+    @media をそのまま使用するとcss変数によるbreak pointの定義ができない現状の仕様があるため、@containerを利用してbreak pointを実質的に変数管理する。:rootの@mediaで数値管理できていることになるので「実質的」と表現している。
+    see: https://www.notion.so/hacksaw/CSS-sass-mixn-e4cec6d22fb2468daf8cb05ab18e34c5
+    */
+    @media (width <= 599px) {
+      --is-mq-mobile: true;
+    }
+
+    @media (600px <= width <= 1024px) {
+      --is-mq-tablet: true;
+    }
+
+    @media (1025px <= width) {
+      --is-mq-desktop: true;
+    }
+
     --gap: 1rem;
     --bg: #fff;
     --fg: var(--color--white);
@@ -147,7 +163,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     overflow: hidden;
   }
 
-  @media (width <= 640px) {
+  @container style(--is-mq-mobile) {
     body:has(dialog[open]) {
       margin-right: 0;
     }
@@ -185,7 +201,7 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     color: var(--fg);
   }
 
-  @media (width <= 640px) {
+  @container style(--is-mq-mobile) {
     h1 {
       font-size: 1.6rem;
     }
