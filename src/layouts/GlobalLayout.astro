@@ -1,9 +1,6 @@
 ---
 import { SITE_NAME } from '@/meta-settings'
 
-import GoogleAnalytics from '@/components/GoogleAnalytics.astro'
-import { PUBLIC_GA_TRACKING_ID } from '@/server-constants'
-
 export interface Props {
   title: string
   description: string
@@ -57,7 +54,6 @@ const { title, description, siteURL, ogImage, siteOGImage } =
     <slot name="head" />
   </head>
   <body>
-    <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <slot name="body" />
   </body>
 </html>
