@@ -20,7 +20,7 @@ const pageName = Astro.url.pathname.split('/').pop() || Astro.url.pathname
       {kebabToPascal(pageName)}
     </h1>
     <div class="container">
-      <slot name="main" />
+      <slot />
     </div>
   </main>
 </GlobalLayout>

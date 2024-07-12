@@ -61,11 +61,19 @@ const menus = [
     text: 'Text',
     children: [{ text: 'SectionTitleWithCoffeeStain' }],
   },
+  {
+    text: 'Util',
+    children: [
+      {
+        text: 'WhenVisible',
+      },
+    ],
+  },
 ]
 ---
 
 <Layout title="" description="" path="/">
-  <main slot="main">
+  <main>
     <ul>
       {
         menus.map((menu) => (
