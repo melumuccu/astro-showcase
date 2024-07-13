@@ -72,57 +72,59 @@ const menus = [
 ---
 
 <nav>
-  <ul>
-    {
-      menus.map((menu) => (
-        <li>
-          <h1>{menu.text}</h1>
-          {menu.children && (
-            <ul>
-              {menu.children.map((child) => (
-                <li>
-                  <a
-                    href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}`}
-                  >
-                    {child.text}
-                  </a>
-                  {child.children && (
-                    <ul>
-                      {child.children.map((grandChild) => (
-                        <li>
-                          <a
-                            href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}/${pascalToKebab(grandChild.text)}`}
-                          >
-                            {grandChild.text}
-                          </a>
-                          {grandChild.children && (
-                            <ul>
-                              {grandChild.children.map((greatGrandChild) => (
-                                <li>
-                                  <a
-                                    href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}/${pascalToKebab(grandChild.text)}/${pascalToKebab(greatGrandChild.text)}`}
-                                  >
-                                    {greatGrandChild.text}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))
-    }
-  </ul>
+  {
+    menus.map((menu) => (
+      <>
+        <h1>{menu.text}</h1>
+        {menu.children && (
+          <ul>
+            {menu.children.map((child) => (
+              <li>
+                <a
+                  href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}`}
+                >
+                  {child.text}
+                </a>
+                {child.children && (
+                  <ul>
+                    {child.children.map((grandChild) => (
+                      <li>
+                        <a
+                          href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}/${pascalToKebab(grandChild.text)}`}
+                        >
+                          {grandChild.text}
+                        </a>
+                        {grandChild.children && (
+                          <ul>
+                            {grandChild.children.map((greatGrandChild) => (
+                              <li>
+                                <a
+                                  href={`/${pascalToKebab(menu.text)}/${pascalToKebab(child.text)}/${pascalToKebab(grandChild.text)}/${pascalToKebab(greatGrandChild.text)}`}
+                                >
+                                  {greatGrandChild.text}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    ))
+  }
 </nav>
 
 <style>
+  h1 {
+    font-size: 2rem;
+  }
+
   nav {
     padding: 1rem;
   }
