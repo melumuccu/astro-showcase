@@ -3,7 +3,7 @@
 ---
 
 <div class="visibleOnScroll">
-  <slot name="content" />
+  <slot />
 </div>
 
 <style>
@@ -11,11 +11,13 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   .visibleOnScroll.visible {
+    opacity: 1; /* 透明度を1にして表示 */
     transition:
       opacity 0.75s ease-out,
       transform 0.75s ease-out; /* アニメーションの定義 */
-    opacity: 1; /* 透明度を1にして表示 */
+
     transform: translateY(0); /* 元の位置に移動 */
   }
 </style>
@@ -46,6 +48,16 @@
     const elementTop = el.getBoundingClientRect().top
 
     // 画面全体の90%までスクロールしたら表示
+    // DEBUG
+    console.log('TEST_elementTop: ')
+    console.log(elementTop)
+    // DEBUG
+    console.log('TEST_viewportHeight: ')
+    console.log(viewportHeight)
+    // DEBUG
+    console.log('TEST_elementTop <= viewportHeight * 0.9: ')
+    console.log(elementTop <= viewportHeight * 0.9)
+
     return elementTop <= viewportHeight * 0.9
   }
 </script>

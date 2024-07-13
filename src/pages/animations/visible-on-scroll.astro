@@ -1,19 +1,23 @@
 ---
+import VisibleOnScrollComponent from '@/components/animations/VisibleOnScroll.astro'
 import Layout from '@/layouts/_Layout.astro'
-import { kebabToPascal } from '@/lib/text'
 ---
 
 <Layout title="" description="" path={Astro.url.pathname}>
-  <main>
-    <nav class="nav-home">←<a href="/">HOME</a></nav>
-    <h1>
-      {kebabToPascal(Astro.url.pathname.split('/').pop())}
-    </h1>
-  </main>
+  {
+    Array.from({ length: 15 }).map((_, i) => (
+      <div class="container">
+        <h2>サンプル {i}</h2>
+        <VisibleOnScrollComponent>
+          <p>スクロールで表示 {i}</p>
+        </VisibleOnScrollComponent>
+      </div>
+    ))
+  }
 </Layout>
 
 <style>
-  .nav-home {
-    font-size: 1.4rem;
+  .container {
+    height: 15rem;
   }
 </style>
