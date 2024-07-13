@@ -1,19 +1,21 @@
 ---
+import GoogleMapComponent from '@/components/embed/GoogleMap.astro'
 import Layout from '@/layouts/_Layout.astro'
-import { kebabToPascal } from '@/lib/text'
+import { GOOGLE_MAP_API_KEY } from '@/server-constants'
 ---
 
 <Layout title="" description="" path={Astro.url.pathname}>
-  <main>
-    <nav class="nav-home">←<a href="/">HOME</a></nav>
-    <h1>
-      {kebabToPascal(Astro.url.pathname.split('/').pop())}
-    </h1>
-  </main>
+  <div class="container">
+    <GoogleMapComponent
+      apiKey={GOOGLE_MAP_API_KEY}
+      place="東京都渋谷区神宮前 1-1-1"
+    />
+  </div>
 </Layout>
 
 <style>
-  .nav-home {
-    font-size: 1.4rem;
+  .container {
+    width: 30vw;
+    aspect-ratio: 1 / 1;
   }
 </style>
