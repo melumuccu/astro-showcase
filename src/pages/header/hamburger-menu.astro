@@ -1,19 +1,29 @@
 ---
+import {
+  HamburgerMenuItem,
+  HamburgerMenuList,
+  HamburgerMenuSection,
+  HamburgerMenuSnsItem,
+} from '@/components/header/hamburger-menu'
 import Layout from '@/layouts/_Layout.astro'
-import { kebabToPascal } from '@/lib/text'
 ---
 
 <Layout title="" description="" path={Astro.url.pathname}>
-  <main>
-    <nav class="nav-home">←<a href="/">HOME</a></nav>
-    <h1>
-      {kebabToPascal(Astro.url.pathname.split('/').pop())}
-    </h1>
-  </main>
+  <nav aria-label="hamburger-menu">
+    <HamburgerMenuList>
+      <HamburgerMenuSection title="Cafe">
+        <HamburgerMenuItem url="/" label="Home" />
+      </HamburgerMenuSection>
+      <HamburgerMenuSection title="Posts">
+        <HamburgerMenuItem url="/posts" label="All" />
+        <HamburgerMenuItem url="/posts/blog" label="Blog" />
+      </HamburgerMenuSection>
+      <HamburgerMenuSection title="SNS">
+        <HamburgerMenuSnsItem sns="x" />
+        <HamburgerMenuSnsItem sns="instagram" />
+      </HamburgerMenuSection>
+    </HamburgerMenuList>
+  </nav>
 </Layout>
 
-<style>
-  .nav-home {
-    font-size: 1.4rem;
-  }
-</style>
+<style></style>
