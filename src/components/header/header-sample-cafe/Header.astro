@@ -1,0 +1,85 @@
+---
+import {
+  HamburgerMenuItem,
+  HamburgerMenuList,
+  HamburgerMenuSection,
+  HamburgerMenuSnsItem,
+} from '@/components/header/hamburger-menu'
+import WhenVisible from '@/components/util/WhenVisible.astro'
+import LinkItem from './LinkItem.astro'
+import LinkList from './LinkList.astro'
+import LogoCafe from './LogoCafe.astro'
+import SnsItem from './SnsItem.astro'
+---
+
+<header class="fonts new-tegomin-regular">
+  <LogoCafe />
+
+  <WhenVisible desktop tablet>
+    <nav class="links" aria-label="links">
+      <LinkList outline="Cafe">
+        <LinkItem link="/" label="Home" />
+      </LinkList>
+      <LinkList outline="Posts">
+        <LinkItem link="/posts" label="ALL" />
+        <LinkItem link="/posts/blog" label="blog" />
+      </LinkList>
+      <LinkList outline="SNS" top="-15px">
+        <SnsItem sns="x" />
+        <SnsItem sns="instagram" />
+      </LinkList>
+    </nav>
+  </WhenVisible>
+
+  <WhenVisible mobile>
+    <nav class="hamburger-menu show-sp" aria-label="hamburger-menu">
+      <HamburgerMenuList>
+        <HamburgerMenuSection title="Cafe">
+          <HamburgerMenuItem url="/" label="Home" />
+        </HamburgerMenuSection>
+        <HamburgerMenuSection title="Posts">
+          <HamburgerMenuItem url="/posts" label="All" />
+          <HamburgerMenuItem url="/posts/blog" label="Blog" />
+        </HamburgerMenuSection>
+        <HamburgerMenuSection title="SNS">
+          <HamburgerMenuSnsItem sns="x" />
+          <HamburgerMenuSnsItem sns="instagram" />
+        </HamburgerMenuSection>
+      </HamburgerMenuList>
+    </nav>
+  </WhenVisible>
+
+  <style>
+    header {
+      /* position: fixed;
+      top: 0; */
+      z-index: var(--z-index-10000);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 16px;
+      background-color: rgb(143 143 143 / 39.6%);
+    }
+
+    .links {
+      --list-min-height: 40px;
+
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    hr {
+      height: 1.5rem;
+      border-right: 1px solid var(--fg);
+    }
+
+    @container style(--is-mq-mobile) {
+      header {
+        padding: 0 16px 16px;
+      }
+    }
+  </style>
+</header>
