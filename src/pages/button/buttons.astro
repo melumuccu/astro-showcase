@@ -1,12 +1,12 @@
 ---
 import SearchButton from '@/components/button/SearchButton.astro'
-import SearchModalComponent from '@/components/modal/SearchModal.astro'
 import Layout from '@/layouts/_Layout.astro'
 ---
 
 <Layout title="" description="" path={Astro.url.pathname}>
-  <SearchButton />
-  <SearchModalComponent />
+  <div class="container">
+    <SearchButton />
+  </div>
 </Layout>
 
 <style>

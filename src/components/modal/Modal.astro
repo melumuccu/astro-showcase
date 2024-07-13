@@ -52,6 +52,13 @@ if (!modalId) {
     position: absolute;
     top: 0;
     right: 0;
+    height: 24px;
+
+    &:focus {
+      border-radius: 6px;
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
   }
 
   .close-dialog-button svg {
