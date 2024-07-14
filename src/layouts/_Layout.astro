@@ -20,6 +20,9 @@ const pageName = Astro.url.pathname.split('/').pop() || Astro.url.pathname
   siteURL={path}
   ogImage={ogImage}
 >
+  <Fragment slot="head">
+    <slot name="head" />
+  </Fragment>
   <div slot="body" class="body">
     <NavMenu />
     <main>
@@ -34,6 +37,10 @@ const pageName = Astro.url.pathname.split('/').pop() || Astro.url.pathname
 </GlobalLayout>
 
 <style>
+  .contents {
+    display: contents;
+  }
+
   .body {
     display: grid;
     grid-template-columns: max-content 1fr;

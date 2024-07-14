@@ -1,0 +1,46 @@
+---
+// see: https://docs.astro.build/ja/guides/view-transitions/
+import { Image1 } from '@/assets'
+import Layout from '@/layouts/_Layout.astro'
+import { Image } from 'astro:assets'
+import { ViewTransitions } from 'astro:transitions'
+
+import './styles.css'
+
+const anim = {
+  old: {
+    name: 'fadeIn',
+    duration: '0.5s',
+    easing: 'linear',
+    fillMode: 'forwards',
+  },
+  new: {
+    name: 'slide',
+    duration: '0.25s',
+    easing: 'linear',
+    fillMode: 'backwards',
+  },
+}
+
+const myFade = {
+  forwards: anim,
+  backwards: anim,
+}
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <!-- ViewTransitions有効化 -->
+  <ViewTransitions slot="head" />
+  <div class="view-transition-container">
+    <nav>
+      <a href="/animation/view-transitions">sample0: fade(default)</a>
+      <a href="/animation/view-transitions/sample1">sample1: slide</a>
+      <a href="/animation/view-transitions/sample2">sample2: slide(一部)</a>
+      <!-- MEMO ここにだけカスタムアニメーションを適用 -->
+      <p transition:animate={myFade}>sample3: カスタム(一部)</p>
+    </nav>
+    <a href="/animation/view-transitions/image">
+      <Image src={Image1} alt="sample" transition:name="image" />
+    </a>
+  </div>
+</Layout>

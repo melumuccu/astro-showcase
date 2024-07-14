@@ -1,0 +1,25 @@
+---
+// see: https://docs.astro.build/ja/guides/view-transitions/
+import { Image1 } from '@/assets'
+import Layout from '@/layouts/_Layout.astro'
+import { Image } from 'astro:assets'
+import { ViewTransitions } from 'astro:transitions'
+import './styles.css'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <!-- ViewTransitions有効化 -->
+  <ViewTransitions slot="head" />
+  <div class="view-transition-container">
+    <nav>
+      <a href="/animation/view-transitions">sample0: fade(default)</a>
+      <a href="/animation/view-transitions/sample1">sample1: slide</a>
+      <!-- MEMO ここにだけslideアニメーションを適用 -->
+      <p transition:animate="slide">sample2: slide(一部)</p>
+      <a href="/animation/view-transitions/sample3">sample3: カスタム(一部)</a>
+    </nav>
+    <a href="/animation/view-transitions/image">
+      <Image src={Image1} alt="sample" transition:name="image" />
+    </a>
+  </div>
+</Layout>

@@ -1,0 +1,25 @@
+.view-transition-container {
+  display: grid;
+  gap: 1rem;
+
+  a,
+  p {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  nav {
+    display: grid;
+    gap: 1rem;
+    place-items: center start;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  img.big {
+    width: 300px;
+    height: 300px;
+  }
+}

@@ -1,0 +1,21 @@
+---
+// see: https://docs.astro.build/ja/guides/view-transitions/
+import { Image1 } from '@/assets'
+import Layout from '@/layouts/_Layout.astro'
+import { Image } from 'astro:assets'
+import { ViewTransitions } from 'astro:transitions'
+import './styles.css'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <!-- ViewTransitions有効化 -->
+  <ViewTransitions slot="head" />
+  <div class="view-transition-container">
+    <nav>
+      <a href="/animation/view-transitions">←back</a>
+      <!-- MEMO 共通のtransition:nameをつけることで画像の拡大がアニメーションする
+      (Astroのアニメーション対象の自動判定ができてないパターンのため自前でnameを付与している感じ) -->
+      <Image src={Image1} class="big" alt="sample" transition:name="image" />
+    </nav>
+  </div>
+</Layout>
