@@ -1,0 +1,70 @@
+<header>
+  <h1>Lorem ipsum dolor sit amet,<br />consectetur adipisicing elit</h1>
+  <img
+    src="https://picsum.photos/800/450"
+    alt=""
+    width="800"
+    height="450"
+    decoding="async"
+    fetchpriority="high"
+  />
+</header>
+
+<style>
+  header {
+    --color-light: #f7f8f8;
+    --color-dark: #434a56;
+    --layout-width: 1280;
+    --fluid-ratio: calc(1 / var(--layout-width) * 100dvi);
+    --text-safe-area: calc(120 * var(--fluid-ratio));
+    --padding: max(calc(32 * var(--fluid-ratio)), 32px);
+
+    display: block grid; /* block の grid を指定しているだけ(つまりgridと同じ) see: https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display */
+
+    /* []は識別名で、`-start`, `-end` は特別な識別子 see: https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Grid_layout_using_named_grid_lines#%E5%90%8D%E5%89%8D%E4%BB%98%E3%81%8D%E3%81%AE%E7%B7%9A%E3%81%AB%E3%82%88%E3%82%8B%E6%9A%97%E9%BB%99%E3%81%AE%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E9%A0%98%E5%9F%9F */
+    grid-template-columns:
+      var(--padding) [text-start] var(--text-safe-area)
+      [image-start] 1fr [image-end text-end];
+    block-size: max(100svb, 480px);
+    padding-block: var(--padding);
+    color: var(--color-dark);
+    background-color: var(--color-light);
+
+    &::after {
+      grid-row: 1;
+      grid-column: image; /* grid-template-columns で指定した識別名を指定(image-start ~ image-end) */
+
+      /* 画像のオーバーレイ */
+      content: '';
+      background-image: linear-gradient(rgb(0 0 0 / 10%), rgb(0 0 0));
+    }
+  }
+
+  header > * {
+    grid-row: 1;
+  }
+
+  h1 {
+    z-index: 1;
+    grid-column: text; /* grid-template-columns で指定した識別名を指定(text-start ~ text-end) */
+    align-self: center;
+    font-family: Cinzel, serif;
+    font-size: clamp(1.25rem, 0.071rem + 5.24cqi, 4rem);
+    font-weight: 400;
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--color-dark) 0% var(--text-safe-area),
+      var(--color-light) var(--text-safe-area) 100%
+    );
+    background-clip: text;
+  }
+
+  img {
+    grid-column: image; /* grid-template-columns で指定した識別名を指定(image-start ~ image-end) */
+    inline-size: 100%;
+    block-size: 0; /* 間延びを防止する */
+    min-block-size: 100%; /* 間延びを防止する */
+    object-fit: cover;
+  }
+</style>
