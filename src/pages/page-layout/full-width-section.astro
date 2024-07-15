@@ -1,0 +1,65 @@
+---
+import Layout from '@/layouts/_Layout.astro'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <div class="container">
+    <section class="margin-inline">
+      <p>①margin-inline: calc(50% - 50vi)</p>
+      <p>親要素を超えて画面幅いっぱいに表示したいときはこれが有名</p>
+    </section>
+    <section class="margin-0-auto">
+      <p>②margin: 0 auto</p>
+      <p>(上手くいってない)</p>
+    </section>
+    <section class="minus-margin">
+      <p>③margin: 0 calc(-1 * ((100vw - var(—main-column-width)) / 2))</p><p>
+        マイナスのマージンを両サイドに設定する
+      </p>
+    </section>
+    <section class="">
+      <p>(上手くいってそうな①③でも要素の幅が微妙に違ってるな...)</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    --main-column-width: 200px;
+
+    display: grid;
+    grid-row: max-content;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  section {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 2rem;
+    background-color: var(--background-color);
+
+    &:nth-child(odd) {
+      --background-color: #c8c8ff;
+    }
+
+    &:nth-child(even) {
+      --background-color: #ffb2b2;
+    }
+  }
+
+  .margin-inline {
+    margin-inline: calc(50% - 50vi);
+  }
+
+  .margin-0-auto {
+    margin: 0 auto;
+  }
+
+  .minus-margin {
+    margin: 0 calc(-1 * ((100vw - var(--main-column-width)) / 2));
+  }
+</style>
