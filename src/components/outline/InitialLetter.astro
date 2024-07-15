@@ -1,0 +1,24 @@
+---
+/* TODO define:vars で変数化がなぜかできなかった */
+type Props = {
+  Tag: string
+  // styleNRows: number
+  // styleNSink: number
+}
+const { Tag } = Astro.props
+// const { Tag, styleNRows, styleNSink } = Astro.props
+---
+
+<Tag class="initial-letter">
+  <slot />
+</Tag>
+
+<style>
+  /* <style define:vars={{ 'style-n-rows': styleNRows, 'style-n-sink': styleNSink }}> */
+  .initial-letter::first-letter {
+    font-weight: bold;
+    initial-letter: 3 1;
+
+    /* initial-letter: var(--style-n-rows) var(--style-n-sink); */
+  }
+</style>
