@@ -1,0 +1,61 @@
+---
+import Layout from '@/layouts/_Layout.astro'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <div class="container">
+    <h3 class="pattern1">
+      シンプルに上下中央寄せ。これだと複数行になったときに図形が複数行テキストに対して中央に配置されるがこれで良いのか?
+      は検討すべき。
+    </h3>
+    <h3 class="pattern2">
+      上下中央寄せの設定はしておらず、図形を1行目に対して中央に配置するための上下マージンを設定している。
+    </h3>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    width: 500px;
+  }
+
+  h3 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1em;
+    padding-block: 1em;
+    padding-inline: 1em;
+    border: 1px solid gold;
+
+    &::before {
+      --size: 1.5em;
+
+      block-size: var(--size);
+      aspect-ratio: 1;
+      clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+      );
+      content: '';
+      background-color: gold;
+    }
+  }
+
+  h3.pattern1 {
+    align-items: center;
+  }
+
+  h3.pattern2 {
+    &::before {
+      margin-block: calc((1lh - var(--size)) / 2);
+    }
+  }
+</style>
