@@ -1,0 +1,202 @@
+---
+import Layout from '@/layouts/_Layout.astro'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <div class="container">
+    {
+      Array.from({ length: 6 }).map((_, i) => (
+        <div class="card">
+          <div class={`heading-pattern heading-pattern${i}`}>
+            <p class="en">Recruit</p>
+            <h2>採用情報 {i}</h2>
+            <div class="container-hr">
+              <hr />
+            </div>
+          </div>
+          <p class="outline">
+            見出しは英字とラインの組み合わせでデザインすることが多くなりました。幾つかパターンを作っておいて、テーマやテイストに合わせてフォントやサイズ、配置を調整するだけ、ウェイトを変えるだけで印象はガラッと変わるので試してみてください。
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+
+  .en {
+    grid-area: en;
+    font-size: var(--font-size-en);
+    font-weight: var(--font-weight-en);
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  h2 {
+    grid-area: h2;
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: 1;
+    color: var(--color-black);
+  }
+
+  .container-hr {
+    display: grid;
+    display: inline;
+    place-content: center;
+    place-items: center;
+  }
+
+  hr {
+    grid-area: hr;
+    width: var(--width-hr);
+    height: var(--height-hr);
+    margin: 0;
+    background-color: var(--color-accent);
+  }
+
+  [class^='heading-pattern'] {
+    --font-size-en: 1.25rem;
+    --font-weight-en: 700;
+    --font-size-h2: 2rem;
+    --font-weight-h2: 700;
+    --color-black: #1b1d24;
+    --width-hr: 40px;
+    --height-hr: 2px;
+    --gap: 0.75rem;
+
+    display: grid;
+    gap: var(--gap);
+    align-items: center;
+  }
+
+  .heading-pattern0,
+  .heading-pattern1 {
+    --color-accent: #2d6ed6;
+  }
+
+  .heading-pattern2,
+  .heading-pattern3 {
+    --color-accent: #fc5ef4;
+  }
+
+  .heading-pattern4,
+  .heading-pattern5 {
+    --color-accent: #2fcabf;
+    --font-size-en: 4rem;
+  }
+
+  .heading-pattern0 {
+    grid-template-rows: [en-start] auto [en-end h2-start] 1fr [h2-end hr-start] auto [hr-end];
+    grid-template-columns: [en-start h2-start hr-start] auto [en-end h2-end hr-end];
+  }
+
+  .heading-pattern1 {
+    grid-template-rows: [hr-start en-start] auto [hr-end en-end h2-start] 1fr [h2-end];
+    grid-template-columns: [hr-start h2-start] var(--width-hr) [hr-end en-start] auto [en-end h2-end];
+  }
+
+  .heading-pattern2 {
+    grid-template-rows: [hr-start] auto [hr-end en-start] auto [en-end h2-start] auto [h2-end];
+    grid-template-columns: [en-start h2-start hr-start] auto [en-end h2-end hr-end];
+    place-content: center;
+    place-items: center;
+
+    .container-hr {
+      width: calc(var(--width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
+      height: calc(var(--width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
+      rotate: -45deg;
+    }
+  }
+
+  .heading-pattern3 {
+    grid-template-rows: [en-start] auto [en-end h2-start] auto [h2-end hr-start] auto [hr-end];
+    grid-template-columns: [en-start h2-start hr-start] auto [en-end h2-end hr-end];
+    place-items: center;
+    justify-content: center;
+
+    .container-hr {
+      height: var(--width-hr);
+      rotate: 90deg;
+    }
+  }
+
+  .heading-pattern4 {
+    grid-template-rows: [h2-start] auto [h2-end hr-start] auto [hr-end];
+    grid-template-columns: [h2-start hr-start] auto [h2-end hr-end];
+    place-items: center;
+    justify-content: center;
+
+    .en {
+      display: none;
+    }
+
+    h2 {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        position: absolute;
+        top: -20%;
+        left: 50%;
+        z-index: -1;
+        font-size: var(--font-size-en);
+        font-weight: var(--font-weight-en);
+        color: var(--color-accent);
+        white-space: nowrap;
+        content: 'Recruit';
+        opacity: 0.3;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .heading-pattern5 {
+    grid-template-rows: [en-start] auto [en-end h2-start] auto [h2-end hr-start] auto [hr-end];
+    grid-template-columns: [en-start h2-start hr-start] auto [en-end h2-end hr-end];
+    place-items: center;
+    justify-content: center;
+
+    .en {
+      position: relative;
+      z-index: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial Black', sans-serif;
+
+      &::before {
+        position: absolute;
+        top: -2%;
+        left: -2%;
+        z-index: 1;
+        font-size: var(--font-size-en);
+        font-weight: var(--font-weight-en);
+        color: transparent;
+        white-space: nowrap;
+        content: 'Recruit';
+        -webkit-text-stroke: 1px var(--color-black);
+      }
+    }
+  }
+</style>
