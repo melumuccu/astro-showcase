@@ -25,7 +25,7 @@ import Layout from '@/layouts/_Layout.astro'
 
 <style>
   .container {
-    --main-column-width: 200px;
+    --_main-column-width: 200px;
 
     display: grid;
     grid-row: max-content;
@@ -40,14 +40,14 @@ import Layout from '@/layouts/_Layout.astro'
     align-items: center;
     justify-content: center;
     padding-inline: 2rem;
-    background-color: var(--background-color);
+    background-color: var(--_background-color);
 
     &:nth-child(odd) {
-      --background-color: #c8c8ff;
+      --_background-color: #c8c8ff;
     }
 
     &:nth-child(even) {
-      --background-color: #ffb2b2;
+      --_background-color: #ffb2b2;
     }
   }
 
@@ -60,6 +60,6 @@ import Layout from '@/layouts/_Layout.astro'
   }
 
   .minus-margin {
-    margin: 0 calc(-1 * ((100vw - var(--main-column-width)) / 2));
+    margin: 0 calc(-1 * ((100vw - var(--_main-column-width)) / 2));
   }
 </style>

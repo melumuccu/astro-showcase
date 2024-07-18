@@ -28,9 +28,9 @@ import Layout from '@/layouts/_Layout.astro'
     border: 1px solid gold;
 
     &::before {
-      --size: 1.5em;
+      --_size: 1.5em;
 
-      block-size: var(--size);
+      block-size: var(--_size);
       aspect-ratio: 1;
       clip-path: polygon(
         50% 0%,
@@ -55,7 +55,7 @@ import Layout from '@/layouts/_Layout.astro'
 
   h3.pattern2 {
     &::before {
-      margin-block: calc((1lh - var(--size)) / 2);
+      margin-block: calc((1lh - var(--_size)) / 2);
     }
   }
 </style>

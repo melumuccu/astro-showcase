@@ -43,18 +43,18 @@ import Layout from '@/layouts/_Layout.astro'
 
   .en {
     grid-area: en;
-    font-size: var(--font-size-en);
-    font-weight: var(--font-weight-en);
+    font-size: var(--_font-size-en);
+    font-weight: var(--_font-weight-en);
     line-height: 1;
-    color: var(--color-accent);
+    color: var(--_color-accent);
   }
 
   h2 {
     grid-area: h2;
-    font-size: var(--font-size-h2);
-    font-weight: var(--font-weight-h2);
+    font-size: var(--_font-size-h2);
+    font-weight: var(--_font-weight-h2);
     line-height: 1;
-    color: var(--color-black);
+    color: var(--_color-black);
   }
 
   .container-hr {
@@ -66,41 +66,41 @@ import Layout from '@/layouts/_Layout.astro'
 
   hr {
     grid-area: hr;
-    width: var(--width-hr);
-    height: var(--height-hr);
+    width: var(--_width-hr);
+    height: var(--_height-hr);
     margin: 0;
-    background-color: var(--color-accent);
+    background-color: var(--_color-accent);
   }
 
   [class^='heading-pattern'] {
-    --font-size-en: 1.25rem;
-    --font-weight-en: 700;
-    --font-size-h2: 2rem;
-    --font-weight-h2: 700;
-    --color-black: #1b1d24;
-    --width-hr: 40px;
-    --height-hr: 2px;
-    --gap: 0.75rem;
+    --_font-size-en: 1.25rem;
+    --_font-weight-en: 700;
+    --_font-size-h2: 2rem;
+    --_font-weight-h2: 700;
+    --_color-black: #1b1d24;
+    --_width-hr: 40px;
+    --_height-hr: 2px;
+    --_gap: 0.75rem;
 
     display: grid;
-    gap: var(--gap);
+    gap: var(--_gap);
     align-items: center;
   }
 
   .heading-pattern0,
   .heading-pattern1 {
-    --color-accent: #2d6ed6;
+    --_color-accent: #2d6ed6;
   }
 
   .heading-pattern2,
   .heading-pattern3 {
-    --color-accent: #fc5ef4;
+    --_color-accent: #fc5ef4;
   }
 
   .heading-pattern4,
   .heading-pattern5 {
-    --color-accent: #2fcabf;
-    --font-size-en: 4rem;
+    --_color-accent: #2fcabf;
+    --_font-size-en: 4rem;
   }
 
   .heading-pattern0 {
@@ -110,7 +110,7 @@ import Layout from '@/layouts/_Layout.astro'
 
   .heading-pattern1 {
     grid-template-rows: [hr-start en-start] auto [hr-end en-end h2-start] 1fr [h2-end];
-    grid-template-columns: [hr-start h2-start] var(--width-hr) [hr-end en-start] auto [en-end h2-end];
+    grid-template-columns: [hr-start h2-start] var(--_width-hr) [hr-end en-start] auto [en-end h2-end];
   }
 
   .heading-pattern2 {
@@ -120,8 +120,8 @@ import Layout from '@/layouts/_Layout.astro'
     place-items: center;
 
     .container-hr {
-      width: calc(var(--width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
-      height: calc(var(--width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
+      width: calc(var(--_width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
+      height: calc(var(--_width-hr) / cos(45deg)); /* 45°ナナメにした長さ */
       rotate: -45deg;
     }
   }
@@ -133,7 +133,7 @@ import Layout from '@/layouts/_Layout.astro'
     justify-content: center;
 
     .container-hr {
-      height: var(--width-hr);
+      height: var(--_width-hr);
       rotate: 90deg;
     }
   }
@@ -160,9 +160,9 @@ import Layout from '@/layouts/_Layout.astro'
         top: -20%;
         left: 50%;
         z-index: -1;
-        font-size: var(--font-size-en);
-        font-weight: var(--font-weight-en);
-        color: var(--color-accent);
+        font-size: var(--_font-size-en);
+        font-weight: var(--_font-weight-en);
+        color: var(--_color-accent);
         white-space: nowrap;
         content: 'Recruit';
         opacity: 0.3;
@@ -190,12 +190,12 @@ import Layout from '@/layouts/_Layout.astro'
         top: -2%;
         left: -2%;
         z-index: 1;
-        font-size: var(--font-size-en);
-        font-weight: var(--font-weight-en);
+        font-size: var(--_font-size-en);
+        font-weight: var(--_font-weight-en);
         color: transparent;
         white-space: nowrap;
         content: 'Recruit';
-        -webkit-text-stroke: 1px var(--color-black);
+        -webkit-text-stroke: 1px var(--_color-black);
       }
     }
   }

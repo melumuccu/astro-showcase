@@ -76,7 +76,7 @@ import { Image } from 'astro:assets'
 
 <style>
   .grid {
-    --column-size: minmax(280px, 1fr);
+    --_column-size: minmax(280px, 1fr);
 
     display: grid;
     gap: 1rem;
@@ -85,11 +85,11 @@ import { Image } from 'astro:assets'
 
     /* main grid では sub grid を縦n列に並べる。auto-* を使う場合はminmaxじゃないとうまく動作しない。 */
     &.auto-fill {
-      grid-template-columns: repeat(auto-fill, var(--column-size));
+      grid-template-columns: repeat(auto-fill, var(--_column-size));
     }
 
     &.auto-fit {
-      grid-template-columns: repeat(auto-fit, var(--column-size));
+      grid-template-columns: repeat(auto-fit, var(--_column-size));
     }
   }
 

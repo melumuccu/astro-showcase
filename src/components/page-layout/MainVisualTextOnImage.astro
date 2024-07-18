@@ -12,23 +12,23 @@
 
 <style>
   header {
-    --color-light: #f7f8f8;
-    --color-dark: #434a56;
-    --layout-width: 1280;
-    --fluid-ratio: calc(1 / var(--layout-width) * 100dvi);
-    --text-safe-area: calc(120 * var(--fluid-ratio));
-    --padding: max(calc(32 * var(--fluid-ratio)), 32px);
+    --_color-light: #f7f8f8;
+    --_color-dark: #434a56;
+    --_layout-width: 1280;
+    --_fluid-ratio: calc(1 / var(--_layout-width) * 100dvi);
+    --_text-safe-area: calc(120 * var(--_fluid-ratio));
+    --_padding: max(calc(32 * var(--_fluid-ratio)), 32px);
 
     display: block grid; /* block の grid を指定しているだけ(つまりgridと同じ) see: https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display */
 
     /* []は識別名で、`-start`, `-end` は特別な識別子 see: https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Grid_layout_using_named_grid_lines#%E5%90%8D%E5%89%8D%E4%BB%98%E3%81%8D%E3%81%AE%E7%B7%9A%E3%81%AB%E3%82%88%E3%82%8B%E6%9A%97%E9%BB%99%E3%81%AE%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E9%A0%98%E5%9F%9F */
     grid-template-columns:
-      var(--padding) [text-start] var(--text-safe-area)
+      var(--_padding) [text-start] var(--_text-safe-area)
       [image-start] 1fr [image-end text-end];
     block-size: max(100svb, 480px);
-    padding-block: var(--padding);
-    color: var(--color-dark);
-    background-color: var(--color-light);
+    padding-block: var(--_padding);
+    color: var(--_color-dark);
+    background-color: var(--_color-light);
 
     &::after {
       grid-row: 1;
@@ -54,8 +54,8 @@
     color: transparent;
     background-image: linear-gradient(
       90deg,
-      var(--color-dark) 0% var(--text-safe-area),
-      var(--color-light) var(--text-safe-area) 100%
+      var(--_color-dark) 0% var(--_text-safe-area),
+      var(--_color-light) var(--_text-safe-area) 100%
     );
     background-clip: text;
   }
