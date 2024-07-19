@@ -1,0 +1,64 @@
+---
+import { Image1, Image2, Image3 } from '@/assets'
+import { Image } from 'astro:assets'
+
+type Props = {
+  class: string
+  pattern: 1 | 2 | 3
+}
+const { pattern } = Astro.props
+
+const cardPatternList = [
+  {
+    title: 'Lorem, ipsum dolor.',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate laborum vitae eos laudantium nihil. Delectus, beatae! Amet dolorum eum sequi?',
+    img: Image1,
+  },
+  {
+    title:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, accusantium!',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, molestiae?',
+    img: Image2,
+  },
+  {
+    title: 'Lorem, ipsum.',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, quam fugit perferendis iusto facere nesciunt voluptate laudantium doloremque recusandae eaque ipsum itaque quo excepturi numquam aperiam! Accusamus vero doloremque quibusdam.',
+    img: Image3,
+  },
+]
+
+const cardPattern = cardPatternList[pattern - 1]
+---
+
+<div class:list={[Astro.props.class, 'card']}>
+  <Image src={cardPattern.img} alt={`Image ${pattern}`} />
+  <p class="title">{cardPattern.title}</p>
+  <p class="description">{cardPattern.description}</p>
+</div>
+
+<style>
+  .card {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 8px;
+  }
+
+  img {
+    justify-self: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+</style>

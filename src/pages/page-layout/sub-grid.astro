@@ -1,76 +1,21 @@
 ---
-import { Image1, Image2, Image3 } from '@/assets'
+import CardSample from '@/components/card/CardSample.astro'
 import Layout from '@/layouts/_Layout.astro'
-import { Image } from 'astro:assets'
 ---
 
 <Layout title="" description="" path={Astro.url.pathname}>
   <h2>auto-fill: 余ったスペースを「追加のgridで」埋める</h2>
   <div class="grid auto-fill">
-    <div class="sub-grid">
-      <Image src={Image1} alt="Image1" />
-      <p class="title">Lorem, ipsum dolor.</p>
-      <p class="description">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate
-        laborum vitae eos laudantium nihil. Delectus, beatae! Amet dolorum eum
-        sequi?
-      </p>
-    </div>
-    <div class="sub-grid">
-      <Image src={Image2} alt="Image2" />
-      <p class="title">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-        accusantium!
-      </p>
-      <p class="description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
-        molestiae?
-      </p>
-    </div>
-    <div class="sub-grid">
-      <Image src={Image3} alt="Image3" />
-      <p class="title">Lorem, ipsum.</p>
-      <p class="description">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, quam
-        fugit perferendis iusto facere nesciunt voluptate laudantium doloremque
-        recusandae eaque ipsum itaque quo excepturi numquam aperiam! Accusamus
-        vero doloremque quibusdam.
-      </p>
-    </div>
+    <CardSample pattern={1} class="sub-grid" />
+    <CardSample pattern={2} class="sub-grid" />
+    <CardSample pattern={3} class="sub-grid" />
   </div>
 
   <h2>auto-fit: 余ったスペースを「既存のgridで」埋める</h2>
   <div class="grid auto-fit">
-    <div class="sub-grid">
-      <Image src={Image1} alt="Image1" />
-      <p class="title">Lorem, ipsum dolor.</p>
-      <p class="description">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate
-        laborum vitae eos laudantium nihil. Delectus, beatae! Amet dolorum eum
-        sequi?
-      </p>
-    </div>
-    <div class="sub-grid">
-      <Image src={Image2} alt="Image2" />
-      <p class="title">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-        accusantium!
-      </p>
-      <p class="description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
-        molestiae?
-      </p>
-    </div>
-    <div class="sub-grid">
-      <Image src={Image3} alt="Image3" />
-      <p class="title">Lorem, ipsum.</p>
-      <p class="description">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, quam
-        fugit perferendis iusto facere nesciunt voluptate laudantium doloremque
-        recusandae eaque ipsum itaque quo excepturi numquam aperiam! Accusamus
-        vero doloremque quibusdam.
-      </p>
-    </div>
+    <CardSample pattern={1} class="sub-grid" />
+    <CardSample pattern={2} class="sub-grid" />
+    <CardSample pattern={3} class="sub-grid" />
   </div>
 </Layout>
 
@@ -93,29 +38,10 @@ import { Image } from 'astro:assets'
     }
   }
 
-  .grid > .sub-grid {
+  .grid > :global(.sub-grid) {
     display: grid;
     grid-template-rows: subgrid; /* 行を sub grid にすることで main grid を行分割する */
     grid-row: span 3; /* sub grid が1-3行目を専有するよう指定 */
     gap: 1rem;
-    padding: 1rem;
-    border: 1px solid #000;
-    border-radius: 8px;
-  }
-
-  img {
-    justify-self: center;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
-
-  .title {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  .description {
-    font-size: 1rem;
   }
 </style>
