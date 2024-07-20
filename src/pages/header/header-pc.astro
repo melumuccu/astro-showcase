@@ -1,0 +1,126 @@
+---
+import { LogoCafe } from '@/assets'
+import Layout from '@/layouts/_Layout.astro'
+import { Image } from 'astro:assets'
+---
+
+<Layout title="" description="" path={Astro.url.pathname}>
+  <header>
+    <Image src={LogoCafe} height="40" alt="" />
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Others</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <button>Sign In</button>
+      <button>Sign Up</button>
+    </div>
+  </header>
+
+  <main>
+    <label>
+      <input type="checkbox" name="toggle" id="" />
+      OFF: flex, ON: grid
+    </label>
+    <p>
+      MEMO:
+      左端・中央・右端にコンテンツを配置するパターンは`justify-content:space-between`で行うと固定値でないとズレる!
+      <br />
+      そのため `grid`と`grid-template-columns: 1fr auto 1fr`でレイアウトを組んだほうがいい
+    </p>
+    <p></p>
+  </main>
+</Layout>
+
+<style>
+  header {
+    position: relative;
+    padding: 1rem;
+    background-color: #e3f5ff;
+    align-items: center;
+
+    & > :last-child {
+      justify-self: end; /* 最後のコンテンツは右寄せにする */
+    }
+
+    /* DEBUG header のセンターライン */
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      content: '';
+      display: block;
+      height: 100%;
+      width: 0px;
+      border: 1px dotted #000;
+    }
+
+    &.grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+    }
+
+    &.flex {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    background-color: #fff;
+  }
+
+  main {
+    display: grid;
+    gap: 1rem;
+  }
+</style>
+
+<script>
+  const toggle = (e: { target: HTMLInputElement }) => {
+    const checkbox = e.target
+    const header = document.querySelector('header')
+    if (header == null) {
+      return
+    }
+    // header のclass を checkbox.checked で 'grid' or 'flex' に切り替える
+    header.classList.toggle('grid', checkbox.checked)
+    header.classList.toggle('flex', !checkbox.checked)
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.querySelector(
+      'input[type="checkbox"]'
+    ) as HTMLInputElement
+
+    if (checkbox == null) {
+      return
+    }
+
+    // checkbox の change イベントを仕込む
+    checkbox?.addEventListener('change', toggle)
+    // 初期表示時に実行
+    checkbox.click()
+  })
+</script>
