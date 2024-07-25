@@ -1,0 +1,44 @@
+---
+// see: https://x.com/tak_dcxi/status/1815318366552535424?s=12
+// see: https://developer.mozilla.org/ja/docs/Web/CSS/-webkit-text-stroke
+---
+
+<p>Lorem, ipsum.</p>
+<p>Lorem, sit.</p>
+<p>Lorem, dolor.</p>
+
+<svg style="position:absolute;">
+  <filter id="filter-dilate">
+    <feMorphology operator="dilate" radius="1" result="DILATED"></feMorphology>
+    <feComposite in="DILATED" in2="SourceGraphic" operator="out"></feComposite>
+  </filter>
+  <filter id="filter-erode">
+    <feMorphology operator="erode" radius="1" result="ERODED"></feMorphology>
+    <feComposite in="ERODED" in2="SourceGraphic" operator="xor"></feComposite>
+  </filter>
+</svg>
+
+<style>
+  p {
+    inline-size: fit-content;
+    margin-inline: auto;
+    font-family: Montserrat, sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  :nth-child(1 of p) {
+    color: transparent;
+    -webkit-text-stroke: 1px #000;
+  }
+
+  :nth-child(2 of p) {
+    color: #000;
+    filter: url('#filter-dilate');
+  }
+
+  :nth-child(3 of p) {
+    color: #000;
+    filter: url('#filter-erode');
+  }
+</style>
